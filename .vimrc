@@ -5,10 +5,16 @@ set nocompatible
 call pathogen#runtime_append_all_bundles()
 
 " Load plugins for filetypes
-filetype plugin on
+filetype plugin indent on
 
 " For custom mappings
 let mapleader = ","
+
+" Wrapping
+set nowrap
+
+" Highlight the line the cursor is on
+set cursorline
 
 " Basic tab behavior
 set autoindent
@@ -30,4 +36,12 @@ map <leader>R :NERDTreeFind<CR>
 " Open tree on current directory
 map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 
+" Because I love this from TM, even though it hardly works
+imap <C-L> <space>=><space>
+
+" Because it works everywhere else, and I don't know of a better way to do
+" forward delete, and I don't really need un-tab in insert mode.
+imap <C-D> <DEL>
+
+imap <D-Return> <ESC>o
 
