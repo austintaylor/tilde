@@ -16,6 +16,9 @@ set nowrap
 " Highlight the line the cursor is on
 set cursorline
 
+" Show possible command line completions
+set wildmenu
+
 " Basic tab behavior
 set autoindent
 set expandtab
@@ -45,3 +48,6 @@ imap <C-D> <DEL>
 
 imap <D-Return> <ESC>o
 
+" Store temporary files in a central spot
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
