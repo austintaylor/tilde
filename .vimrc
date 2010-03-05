@@ -19,12 +19,28 @@ set cursorline
 " Show possible command line completions
 set wildmenu
 
+" Line numbers
+set number
+
+" Turn off the toolbar, scrollbars
+if has("gui_running")
+  set guioptions+=TlRLrb
+  set guioptions-=TlRLrb
+endif
+
+" Longer history (default is 20)
+set history=1000
+
 " Basic tab behavior
 set autoindent
 set expandtab
 set smarttab
 set shiftwidth=2
 set tabstop=2
+
+" Split toward the bottom right
+set splitbelow
+set splitright
 
 " Strip trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
@@ -51,3 +67,6 @@ imap <D-Return> <ESC>o
 " Store temporary files in a central spot
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+colorscheme jellybeans
+
