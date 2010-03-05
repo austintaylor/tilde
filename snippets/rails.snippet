@@ -1,0 +1,11 @@
+snippet hello
+	puts "Hello World!"
+snippet create
+	def create
+		@${1:model} = ${2:`substitute('$1', '^.', '\u&', '')`}.new}(params[:$1])
+		@$1.save!
+		redirect_to ${3:$1s_path}
+	rescue ActiveRecord::RecordInvalid
+		flash.now[:error] = @$1.errors.full_messages.to_sentence + "."
+		render :action => 'new'
+	end

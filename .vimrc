@@ -70,3 +70,15 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 colorscheme jellybeans
 
+
+function! Camelize(name)
+  return substitute(a:name, '\v%(^(.)|_(.))', '\u\1\u\2', 'g')
+endfunction
+
+function! ModelName()
+  return substitute(Filename('', 'model'), 's_controller', '', '')
+endfunction
+
+function! CamelModelName()
+  return Camelize(ModelName())
+endfunction

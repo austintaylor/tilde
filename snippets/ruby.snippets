@@ -1,0 +1,25 @@
+snippet create
+	def create
+		@${1:`ModelName()`} = ${2:`CamelModelName()`.new}(params[:$1])
+		@$1.save!
+		redirect_to ${3:$1s_path}
+	rescue ActiveRecord::RecordInvalid
+		flash.now[:error] = @$1.errors.full_messages.to_sentence + "."
+		render :action => 'new'
+	end
+
+snippet update
+	def update
+		@${1:`ModelName()`}.update_attributes!(params[:$1])
+		redirect_to ${2:$1_path(@$1)}
+	rescue ActiveRecord::RecordInvalid
+		flash.now[:error] = @$1.errors.full_messages.to_sentence + "."
+		render :action => 'edit'
+	end
+
+snippet destroy
+	def destroy
+		@${1:`ModelName()`}.destroy
+		redirect_to ${3:$1s_path}
+	end
+
