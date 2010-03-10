@@ -70,6 +70,18 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 colorscheme jellybeans
 
+map <D-r> :call RunRubyFile()<CR>
+
+function! RunRubyFile()
+  let old_make = &makeprg
+  try
+    let &l:makeprg = 'ruby '.expand("%")
+    exe 'make'
+    cwindow
+  finally
+    let &l:makeprg = old_make
+  endtry
+endfunction
 
 function! Camelize(name)
   return substitute(a:name, '\v%(^(.)|_(.))', '\u\1\u\2', 'g')

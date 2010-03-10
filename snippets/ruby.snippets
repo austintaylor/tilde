@@ -23,3 +23,23 @@ snippet destroy
 		redirect_to ${3:$1s_path}
 	end
 
+snippet bt
+	belongs_to :${1:model}
+
+snippet hm
+	has_many :${1:collection}
+
+snippet acrylic
+	require 'rubygems'
+	require 'acrylic'
+
+	class ${1:`Camelize(Filename())`} < ImageGenerator
+		image :${2:name} do
+			dimensions ${3:100}, ${4:100}
+			${5}
+		end
+
+		preview(:$2)
+		#suite
+	end
+
