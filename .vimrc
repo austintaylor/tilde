@@ -18,6 +18,7 @@ set cursorline
 
 " Show possible command line completions
 set wildmenu
+set wildmode=list:longest
 
 " Line numbers
 set number
@@ -42,8 +43,11 @@ set tabstop=2
 set splitbelow
 set splitright
 
+" Fullscreen should use the whole screen
+set fuoptions=maxvert,maxhorz
+
 " Strip trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
 
 " recognize Capfile, Gemfile
 autocmd BufRead,BufNewFile Capfile set filetype=ruby
@@ -70,18 +74,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 colorscheme jellybeans
 
-map <D-r> :call RunRubyFile()<CR>
-
-function! RunRubyFile()
-  let old_make = &makeprg
-  try
-    let &l:makeprg = 'ruby '.expand("%")
-    exe 'make'
-    cwindow
-  finally
-    let &l:makeprg = old_make
-  endtry
-endfunction
+map <D-r> :!ruby %<CR>
 
 function! Camelize(name)
   return substitute(a:name, '\v%(^(.)|_(.))', '\u\1\u\2', 'g')
@@ -94,3 +87,47 @@ endfunction
 function! CamelModelName()
   return Camelize(ModelName())
 endfunction
+
+nnoremap <C-W>O :tabnew %<CR>
+nnoremap <C-W>o :tabnew %<CR>
+nnoremap <C-W><C-O> :tabnew %<CR>
+
+" Text object for indented code
+onoremap <silent>ai :<C-u>cal IndTxtObj(0)<CR>
+onoremap <silent>ii :<C-u>cal IndTxtObj(1)<CR>
+vnoremap <silent>ai :<C-u>cal IndTxtObj(0)<CR><Esc>gv
+vnoremap <silent>ii :<C-u>cal IndTxtObj(1)<CR><Esc>gv
+
+function! IndTxtObj(inner)
+  let curline = line(".")
+  let lastline = line("$")
+  let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
+  let i = i < 0 ? 0 : i
+  if getline(".") =~ "^\\s*$"
+    return
+  endif
+  let p = line(".") - 1
+  let nextblank = getline(p) =~ "^\\s*$"
+  while p > 0 && (nextblank || indent(p) >= i )
+    -
+    let p = line(".") - 1
+    let nextblank = getline(p) =~ "^\\s*$"
+  endwhile
+  if (!a:inner)
+    -
+  endif
+  normal! 0V
+  call cursor(curline, 0)
+  let p = line(".") + 1
+  let nextblank = getline(p) =~ "^\\s*$"
+  while p <= lastline && (nextblank || indent(p) >= i )
+    +
+    let p = line(".") + 1
+    let nextblank = getline(p) =~ "^\\s*$"
+  endwhile
+  if (!a:inner)
+    +
+  endif
+  normal! $
+endfunction
+
