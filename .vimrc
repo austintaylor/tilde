@@ -68,6 +68,18 @@ imap <C-D> <DEL>
 
 imap <D-Return> <ESC>o
 
+" Symbols and strings
+nmap <leader>: ds"i:<Esc>e
+nmap <leader>" bhxcsw"
+
+" Experimenting
+nmap <space> i<space><ESC>
+nmap <enter> _i<enter><ESC>
+
+" Prev/Next Buffer
+nmap <C-n> :bn<CR>
+nmap <C-p> :bp<CR>
+
 " Store temporary files in a central spot
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
