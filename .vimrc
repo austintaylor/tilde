@@ -50,22 +50,33 @@ map <leader>R :NERDTreeFind<CR>
 " Open tree on current directory
 map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 
-" Because I love this from TM, even though it hardly works
+" Because I love these from TM
 imap <C-L> <space>=><space>
+imap <D-Return> <ESC>o
 
 " Because it works everywhere else, and I don't know of a better way to do
 " forward delete, and I don't really need un-tab in insert mode.
 imap <C-D> <DEL>
 
-imap <D-Return> <ESC>o
-
 " Symbols and strings
 nmap <leader>: ds"i:<Esc>e
 nmap <leader>" bhxcsw"
 
+" object && object.method
+map <leader>& mayB`ai<space>&&<space><esc>pl
+
+" Make Y consistent with D, C
+nnoremap Y y$
+
 " Prev/Next Buffer
 nmap <C-n> :bn<CR>
 nmap <C-p> :bp<CR>
+
+" Scroll shortcuts
+nmap <C-h> zH
+nmap <C-l> zL
+nmap <C-j> <C-d>
+nmap <C-k> <C-u>
 
 " Store temporary files in a central spot
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -85,18 +96,16 @@ function! CamelModelName()
   return Camelize(ModelName())
 endfunction
 
+" Make C-w o (only window) reversible by opening a tab
 nnoremap <C-W>O :tabnew %<CR>
 nnoremap <C-W>o :tabnew %<CR>
 nnoremap <C-W><C-O> :tabnew %<CR>
 
-" object && object.method
-map <leader>& mayB`ai<space>&&<space><esc>pl
-
 " Text object for indented code
-onoremap <silent>ai :<C-u>cal IndTxtObj(0)<CR>
-onoremap <silent>ii :<C-u>cal IndTxtObj(1)<CR>
-vnoremap <silent>ai :<C-u>cal IndTxtObj(0)<CR><Esc>gv
-vnoremap <silent>ii :<C-u>cal IndTxtObj(1)<CR><Esc>gv
+onoremap <silent>ai :<C-u>call IndTxtObj(0)<CR>
+onoremap <silent>ii :<C-u>call IndTxtObj(1)<CR>
+vnoremap <silent>ai :<C-u>call IndTxtObj(0)<CR><Esc>gv
+vnoremap <silent>ii :<C-u>call IndTxtObj(1)<CR><Esc>gv
 
 function! IndTxtObj(inner)
   if &filetype == 'haml' || &filetype == 'sass' || &filetype == 'python'
