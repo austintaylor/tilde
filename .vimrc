@@ -50,6 +50,9 @@ map <leader>R :NERDTreeFind<CR>
 " Open tree on current directory
 map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 
+" Don't know if I'll ever use this.
+map <leader>o ebioptions[:<ESC>lea]<ESC>
+
 " Because I love these from TM
 imap <C-L> <space>=><space>
 imap <D-Return> <ESC>o
@@ -61,6 +64,10 @@ imap <C-D> <DEL>
 " Symbols and strings
 nmap <leader>: ds"i:<Esc>e
 nmap <leader>" bhxcsw"
+
+"Extract local variable
+vmap <leader>l "vc
+nmap <leader>v viw"ny<ESC>On = v<ESC>
 
 " object && object.method
 map <leader>& mayB`ai<space>&&<space><esc>pl
