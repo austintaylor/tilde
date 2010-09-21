@@ -25,3 +25,6 @@
 [submodule "bundle/ack"]
 	path = bundle/ack
 	url = http://github.com/mileszs/ack.vim.git
+[submodule "bundle/repeat"]
+	path = bundle/repeat
+	url = http://github.com/tpope/vim-repeat.git
