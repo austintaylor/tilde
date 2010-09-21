@@ -1,99 +1,150 @@
-" No Vi Compatibility
+
+" =============
+"     Setup
+" =============
+
 set nocompatible
-
-" Load bundles
 call pathogen#runtime_append_all_bundles()
-
-" Load plugins for filetypes
 filetype plugin indent on
-
-" For custom mappings
 let mapleader = ","
 
-" Wrapping
+
+" ============
+"   Settings
+" ============
+
+set encoding=utf-8
 set nowrap
-
-" Highlight the line the cursor is on
 set cursorline
-
-" Show possible command line completions
 set wildmenu
 set wildmode=list:longest
-
-" Line numbers
 set number
-
-" Longer history (default is 20)
 set history=1000
+set scrolloff=3
+set ttyfast
+set undofile
 
-" Basic tab behavior
+" No bells
+set noerrorbells
+set novisualbell
+set t_vb=
+
+" Indentation
 set autoindent
 set expandtab
 set smarttab
 set shiftwidth=2
 set tabstop=2
 
-" Split toward the bottom right
+" Split behavior
 set splitbelow
 set splitright
 
-" Strip trailing whitespace
-"autocmd BufWritePre * :%s/\s\+$//e
+" Search behavior
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+nnoremap / /\v
+vnoremap / /\v
+map <leader><space> :let @/=''<cr>
+
+" Vim Directory
+set undodir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+
+" ============
+"   Autocmd
+" ============
+
+" Auto-save
+au FocusLost * :wa
 
 " recognize Capfile, Gemfile
 autocmd BufRead,BufNewFile Capfile set filetype=ruby
 autocmd BufRead,BufNewFile Gemfile set filetype=ruby
 
-" Reveal current file in tree
+" Strip trailing whitespace
+" (disabled because it was interfering with tab behavior)
+"autocmd BufWritePre * :%s/\s\+$//e
+
+
+" ============
+"   Mappings
+" ============
+
+" Fundamentals
+nnoremap j gj
+nnoremap k gk
+nnoremap ; :
+nnoremap <tab> %
+vnoremap <tab> %
+nnoremap Y y$
+nnoremap Q gqip
+imap <C-D> <DEL>
+
+" Scroll left/right
+nmap <C-h> zH
+nmap <C-l> zL
+
+" Make C-w o (only window) reversible by opening a tab
+nnoremap <C-W>O :tabnew %<CR>
+nnoremap <C-W>o :tabnew %<CR>
+nnoremap <C-W><C-O> :tabnew %<CR>
+
+" Tree commands
+map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <leader>R :NERDTreeFind<CR>
 
-" Open tree on current directory
-map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+" Ack
+nnoremap <leader>a :Ack<space>
 
-" Don't know if I'll ever use this.
-map <leader>o ebioptions[:<ESC>lea]<ESC>
+" Reselect pasted text
+nnoremap <leader>v V`]
 
-" Because I love these from TM
+" Sudo to write
+cmap w!! w !sudo tee % >/dev/null
+
+" TM inspired keys
 imap <C-L> <space>=><space>
 imap <D-Return> <ESC>o
 
-" Because it works everywhere else, and I don't know of a better way to do
-" forward delete, and I don't really need un-tab in insert mode.
-imap <C-D> <DEL>
-
 " Symbols and strings
-nmap <leader>: ds"i:<Esc>e
-nmap <leader>" bhxcsw"
+nmap <leader>: ds'ds"i:<Esc>e
+nmap <leader>" ebhxcsw"
+nmap <leader>' ebhxcsw'
 
-"Extract local variable
+" Extract local variable
+" Instructions:
+"   - Select the expression you want to extract.
+"   - ,l
+"   - Type the name you want to give it.
+"   - <ESC>,v
+" Example: vi(,lvariable<ESC>,v
 vmap <leader>l "vc
 nmap <leader>v viw"ny<ESC>On = v<ESC>
 
 " object && object.method
+" Note: Cursor should be on the dot between object and method
 map <leader>& mayB`ai<space>&&<space><esc>pl
 
-" Make Y consistent with D, C
-nnoremap Y y$
-
-" Prev/Next Buffer
-nmap <C-n> :bn<CR>
-nmap <C-p> :bp<CR>
-
-" Scroll shortcuts
-nmap <C-h> zH
-nmap <C-l> zL
-nmap <C-j> <C-d>
-nmap <C-k> <C-u>
-
-" Store temporary files in a central spot
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" Markdown headings
+nnoremap <leader>1 yypVr=
 
 map <D-r> :!ruby %<CR>
 
+
+" =============
+"    Support
+" =============
+
 function! Camelize(name)
   return substitute(a:name, '\v%(^(.)|_(.))', '\u\1\u\2', 'g')
-endfunction
+endfunctio
 
 function! ModelName()
   return substitute(Filename('', 'model'), 's_controller', '', '')
@@ -103,12 +154,11 @@ function! CamelModelName()
   return Camelize(ModelName())
 endfunction
 
-" Make C-w o (only window) reversible by opening a tab
-nnoremap <C-W>O :tabnew %<CR>
-nnoremap <C-W>o :tabnew %<CR>
-nnoremap <C-W><C-O> :tabnew %<CR>
 
-" Text object for indented code
+" ==================
+"    Text Objects
+" ==================
+
 onoremap <silent>ai :<C-u>call IndTxtObj(0)<CR>
 onoremap <silent>ii :<C-u>call IndTxtObj(1)<CR>
 vnoremap <silent>ai :<C-u>call IndTxtObj(0)<CR><Esc>gv
