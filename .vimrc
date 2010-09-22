@@ -116,7 +116,7 @@ map <leader>R :NERDTreeFind<CR>
 nnoremap <leader>a :Ack<space>
 
 " Reselect pasted text
-nnoremap <leader>v V`]
+nnoremap <leader>p V`]
 
 " Sudo to write
 cmap w!! w !sudo tee % >/dev/null
@@ -149,7 +149,6 @@ nnoremap <leader>1 yypVr=
 
 " Poor man's runner. Need some help here.
 map <D-r> :!ruby -Itest %<CR>
-
 
 " ===================
 "    :Open Command
