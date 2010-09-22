@@ -23,7 +23,6 @@ set number
 set history=1000
 set scrolloff=3
 set ttyfast
-set undofile
 
 " No bells
 set visualbell t_vb=
@@ -50,10 +49,15 @@ nnoremap / /\v
 vnoremap / /\v
 map <leader><space> :let @/=''<cr>
 
-" Vim Directory
-set undodir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" Persistent undo
+if v:version >= 703
+  set undofile
+  set undodir=~/.vim-tmp
+endif
+
+" .vim-tmp
+set backupdir=~/.vim-tmp
+set directory=~/.vim-tmp
 
 
 " ============
@@ -150,6 +154,9 @@ nnoremap <leader>1 yypVr=
 
 " Poor man's runner. Need some help here.
 map <D-r> :!ruby -Itest %<CR>
+
+" I do this all the time.
+command! Q :q
 
 " ===================
 "    :Open Command
