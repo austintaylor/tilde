@@ -25,9 +25,7 @@ set ttyfast
 set undofile
 
 " No bells
-set noerrorbells
-set novisualbell
-set t_vb=
+set visualbell t_vb=
 
 " Indentation
 set autoindent
