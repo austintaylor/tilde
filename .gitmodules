@@ -19,9 +19,6 @@
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = git://github.com/msanders/snipmate.vim.git
-[submodule "bundle/cucumber"]
-	path = bundle/cucumber
-	url = http://github.com/tpope/vim-cucumber.git
 [submodule "bundle/ack"]
 	path = bundle/ack
 	url = http://github.com/mileszs/ack.vim.git
@@ -31,6 +28,3 @@
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
 	url = http://github.com/tpope/vim-fugitive.git
-[submodule "bundle/markdown"]
-	path = bundle/markdown
-	url = http://github.com/tpope/vim-markdown.git

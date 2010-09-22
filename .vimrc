@@ -92,8 +92,6 @@ augroup END
 nnoremap j gj
 nnoremap k gk
 nnoremap ; :
-nnoremap <tab> %
-vnoremap <tab> %
 nnoremap Y y$
 nnoremap Q gqip
 imap <C-D> <DEL>
