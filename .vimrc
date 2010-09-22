@@ -75,6 +75,9 @@ augroup vimrc
   au BufWritePost .vimrc source %
   au BufWritePost .gvimrc source %
 
+  " Don't want cursor line highlighting in quickfix
+  au QuickFixCmdPost * set nocursorline
+
   " Strip trailing whitespace
   " (disabled because it was interfering with tab behavior)
   "au BufWritePre * :%s/\s\+$//e
