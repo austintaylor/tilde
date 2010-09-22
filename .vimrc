@@ -60,16 +60,25 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 "   Autocmd
 " ============
 
-" Auto-save
-au FocusLost * :wa
+augroup vimrc
+  " Clear autocmd
+  autocmd!
 
-" recognize Capfile, Gemfile
-au BufRead,BufNewFile Capfile set filetype=ruby
-au BufRead,BufNewFile Gemfile set filetype=ruby
+  " Auto-save
+  au FocusLost * :wa
 
-" Strip trailing whitespace
-" (disabled because it was interfering with tab behavior)
-"au BufWritePre * :%s/\s\+$//e
+  " Recognize Capfile, Gemfile
+  au BufRead,BufNewFile Capfile set filetype=ruby
+  au BufRead,BufNewFile Gemfile set filetype=ruby
+
+  " Auto-reload
+  au BufWritePost .vimrc source %
+  au BufWritePost .gvimrc source %
+
+  " Strip trailing whitespace
+  " (disabled because it was interfering with tab behavior)
+  "au BufWritePre * :%s/\s\+$//e
+augroup END
 
 
 " ============
@@ -89,6 +98,10 @@ imap <C-D> <DEL>
 " Scroll left/right
 nmap <C-h> zH
 nmap <C-l> zL
+
+" Home/End
+nmap H 0
+nmap L $
 
 " Make C-w o (only window) reversible by opening a tab
 nnoremap <C-W>O :tabnew %<CR>
