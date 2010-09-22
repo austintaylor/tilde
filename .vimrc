@@ -7,6 +7,7 @@ set nocompatible
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 let mapleader = ","
+let g:project_dir = "~/Workspace"
 
 
 " ============
@@ -63,12 +64,12 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 au FocusLost * :wa
 
 " recognize Capfile, Gemfile
-autocmd BufRead,BufNewFile Capfile set filetype=ruby
-autocmd BufRead,BufNewFile Gemfile set filetype=ruby
+au BufRead,BufNewFile Capfile set filetype=ruby
+au BufRead,BufNewFile Gemfile set filetype=ruby
 
 " Strip trailing whitespace
 " (disabled because it was interfering with tab behavior)
-"autocmd BufWritePre * :%s/\s\+$//e
+"au BufWritePre * :%s/\s\+$//e
 
 
 " ============
@@ -133,12 +134,50 @@ map <leader>& mayB`ai<space>&&<space><esc>pl
 " Markdown headings
 nnoremap <leader>1 yypVr=
 
-map <D-r> :!ruby %<CR>
+" Poor man's runner. Need some help here.
+map <D-r> :!ruby -Itest %<CR>
 
 
-" =============
-"    Support
-" =============
+" ===================
+"    :Open Command
+" ===================
+
+command! OpenVimrc :call OpenVimrc()
+command! -nargs=1 -complete=dir OpenDir :call OpenDir(<f-args>)
+command! -nargs=1 -complete=custom,ProjectComplete Open :call Open(<f-args>)
+
+function! Open(project)
+  call OpenDir(g:project_dir . '/' . a:project)
+  execute 'normal l'
+endfunction
+
+function! OpenDir(path)
+  execute 'lcd ' . a:path
+  let l:readme = get(split(system("ls README*"), "\n"), 0)
+  if filereadable(l:readme)
+    execute 'edit ' . l:readme
+  else
+    new
+  endif
+  silent only
+  execute 'NERDTree ' . a:path
+endfunction
+
+function! OpenVimrc()
+  call OpenDir("~/.vim")
+  execute 'normal I'
+  execute 'normal l'
+  execute 'edit .vimrc'
+endfunction
+
+function! ProjectComplete(prefix, line, position)
+  return system("ls " . g:project_dir)
+endfunction
+
+
+" =====================
+"    Snippet Support
+" =====================
 
 function! Camelize(name)
   return substitute(a:name, '\v%(^(.)|_(.))', '\u\1\u\2', 'g')
