@@ -69,7 +69,8 @@ augroup vimrc
   autocmd!
 
   " Auto-save
-  au FocusLost * :wa
+  " Can't have this always trying to save unnamed buffers
+  "au FocusLost * :wa
 
   " Recognize Capfile, Gemfile
   au BufRead,BufNewFile Capfile set filetype=ruby
@@ -95,7 +96,7 @@ augroup END
 " Fundamentals
 nnoremap j gj
 nnoremap k gk
-nnoremap ; :
+nnoremap <space> :
 nnoremap Y y$
 nnoremap Q gqip
 imap <C-D> <DEL>
@@ -135,6 +136,9 @@ nmap <leader>: ds'ds"i:<Esc>e
 nmap <leader>" ebhxcsw"
 nmap <leader>' ebhxcsw'
 
+" Color Picker
+nmap <leader>c :ChooseColor<CR>
+
 " Extract local variable
 " Instructions:
 "   - Select the expression you want to extract.
@@ -158,43 +162,6 @@ map <D-r> :!ruby -Itest %<CR>
 " I do this all the time.
 command! Q :q
 
-" ===================
-"    :Open Command
-" ===================
-
-command! OpenVimrc :call OpenVimrc()
-command! -nargs=1 -complete=dir OpenDir :call OpenDir(<f-args>)
-command! -nargs=1 -complete=custom,ProjectComplete Open :call Open(<f-args>)
-
-function! Open(project)
-  call OpenDir(g:project_dir . '/' . a:project)
-  execute 'normal l'
-endfunction
-
-function! OpenDir(path)
-  execute 'lcd ' . a:path
-  let l:readme = get(split(system("ls README*"), "\n"), 0)
-  if filereadable(l:readme)
-    execute 'edit ' . l:readme
-  else
-    new
-  endif
-  silent only
-  execute 'NERDTree ' . a:path
-endfunction
-
-function! OpenVimrc()
-  call OpenDir("~/.vim")
-  execute 'normal I'
-  execute 'normal l'
-  execute 'edit .vimrc'
-endfunction
-
-function! ProjectComplete(prefix, line, position)
-  return system("ls " . g:project_dir)
-endfunction
-
-
 " =====================
 "    Snippet Support
 " =====================
@@ -210,52 +177,3 @@ endfunction
 function! CamelModelName()
   return Camelize(ModelName())
 endfunction
-
-
-" ==================
-"    Text Objects
-" ==================
-
-onoremap <silent>ai :<C-u>call IndTxtObj(0)<CR>
-onoremap <silent>ii :<C-u>call IndTxtObj(1)<CR>
-vnoremap <silent>ai :<C-u>call IndTxtObj(0)<CR><Esc>gv
-vnoremap <silent>ii :<C-u>call IndTxtObj(1)<CR><Esc>gv
-
-function! IndTxtObj(inner)
-  if &filetype == 'haml' || &filetype == 'sass' || &filetype == 'python'
-    let meaningful_indentation = 1
-  else
-    let meaningful_indentation = 0
-  endif
-  let curline = line(".")
-  let lastline = line("$")
-  let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
-  let i = i < 0 ? 0 : i
-  if getline(".") =~ "^\\s*$"
-    return
-  endif
-  let p = line(".") - 1
-  let nextblank = getline(p) =~ "^\\s*$"
-  while p > 0 && (nextblank || indent(p) >= i )
-    -
-    let p = line(".") - 1
-    let nextblank = getline(p) =~ "^\\s*$"
-  endwhile
-  if (!a:inner)
-    -
-  endif
-  normal! 0V
-  call cursor(curline, 0)
-  let p = line(".") + 1
-  let nextblank = getline(p) =~ "^\\s*$"
-  while p <= lastline && (nextblank || indent(p) >= i )
-    +
-    let p = line(".") + 1
-    let nextblank = getline(p) =~ "^\\s*$"
-  endwhile
-  if (!a:inner && !meaningful_indentation)
-    +
-  endif
-  normal! $
-endfunction
-
