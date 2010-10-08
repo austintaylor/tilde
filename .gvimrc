@@ -14,3 +14,6 @@ set fuoptions=maxvert,maxhorz
 " Color scheme
 colorscheme jellybeans
 
+hi markdownCode guifg=#a0a9bf
+hi markdownCodeBlock guifg=#a0a9bf
+
