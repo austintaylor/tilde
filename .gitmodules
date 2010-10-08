@@ -40,3 +40,6 @@
 [submodule "bundle/commaobject"]
 	path = bundle/commaobject
 	url = git@github.com:austintaylor/vim-commaobject.git
+[submodule "bundle/objectcompletion"]
+	path = bundle/objectcompletion
+	url = git@github.com:austintaylor/vim-objectcompletion.git
