@@ -162,6 +162,10 @@ map <D-r> :!ruby -Itest %<CR>
 " I do this all the time.
 command! Q :q
 
+" Find & Replace
+nnoremap <leader>r :%s//
+vnoremap <leader>r "ry<ESC>:%s/r/
+
 " =====================
 "    Snippet Support
 " =====================
