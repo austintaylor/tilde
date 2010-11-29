@@ -120,6 +120,7 @@ map <leader>R :NERDTreeFind<CR>
 
 " Ack
 nnoremap <leader>a :Ack<space>
+vnoremap <leader>a "ry:Ack<space>"r"
 
 " Reselect pasted text
 nnoremap <leader>p V`]
@@ -147,7 +148,7 @@ nmap <leader>c :ChooseColor<CR>
 "   - <ESC>,v
 " Example: vi(,lvariable<ESC>,v
 vmap <leader>l "vc
-nmap <leader>v viw"ny<ESC>On = v<ESC>
+nmap <leader>v viw"nyOn = v<ESC>
 
 " object && object.method
 " Note: Cursor should be on the dot between object and method
@@ -164,7 +165,7 @@ command! Q :q
 
 " Find & Replace
 nnoremap <leader>r :%s//
-vnoremap <leader>r "ry<ESC>:%s/r/
+vnoremap <leader>r "ry:%s/r/
 
 " =====================
 "    Snippet Support
