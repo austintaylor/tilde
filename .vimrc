@@ -52,12 +52,12 @@ map <leader><space> :let @/=''<cr>
 " Persistent undo
 if v:version >= 703
   set undofile
-  set undodir=~/.vim-tmp
+  set undodir=~/.vim/tmp
 endif
 
 " .vim-tmp
-set backupdir=~/.vim-tmp
-set directory=~/.vim-tmp
+set backupdir=~/.vim/tmp
+set directory=~/.vim/tmp
 
 
 " ============
