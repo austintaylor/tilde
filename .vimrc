@@ -105,10 +105,6 @@ imap <C-D> <DEL>
 nmap <C-h> zH
 nmap <C-l> zL
 
-" Home/End
-nmap H 0
-nmap L $
-
 " Make C-w o (only window) reversible by opening a tab
 nnoremap <C-W>O :tabnew %<CR>
 nnoremap <C-W>o :tabnew %<CR>
@@ -181,4 +177,17 @@ endfunction
 
 function! CamelModelName()
   return Camelize(ModelName())
+endfunction
+
+
+" ======================
+"     Tab Label
+" ======================
+
+function! TabLabel()
+  if exists("t:directory")
+    return t:directory
+  else
+    return ""
+  endif
 endfunction
