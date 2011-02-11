@@ -43,3 +43,6 @@
 [submodule "bundle/objectcompletion"]
 	path = bundle/objectcompletion
 	url = http://github.com/austintaylor/vim-objectcompletion.git
+[submodule "bundle/cocoa"]
+	path = bundle/cocoa
+	url = http://github.com/msanders/cocoa.vim.git
