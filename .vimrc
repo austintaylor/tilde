@@ -96,7 +96,6 @@ augroup END
 " Fundamentals
 nnoremap j gj
 nnoremap k gk
-nnoremap <space> :
 nnoremap Y y$
 nnoremap Q gqip
 imap <C-D> <DEL>
@@ -120,9 +119,6 @@ vnoremap <leader>a "ry:Ack<space>"r"
 
 " Reselect pasted text
 nnoremap <leader>p V`]
-
-" Sudo to write
-cmap w!! w !sudo tee % >/dev/null
 
 " TM inspired keys
 imap <C-L> <space>=><space>
@@ -150,9 +146,6 @@ nmap <leader>v viw"nyOn = v<ESC>
 " Note: Cursor should be on the dot between object and method
 map <leader>& mayB`ai<space>&&<space><esc>pl
 
-" Markdown headings
-nnoremap <leader>1 yypVr=
-
 " Poor man's runner. Need some help here.
 map <D-r> :!ruby -Itest %<CR>
 
@@ -162,6 +155,7 @@ command! Q :q
 " Find & Replace
 nnoremap <leader>r :%s//
 vnoremap <leader>r "ry:%s/r/
+vnoremap <leader>f "fy:/f
 
 " =====================
 "    Snippet Support
