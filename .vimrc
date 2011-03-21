@@ -133,14 +133,10 @@ nmap <leader>' ebhxcsw'
 nmap <leader>c :ChooseColor<CR>
 
 " Extract local variable
-" Instructions:
-"   - Select the expression you want to extract.
-"   - ,l
-"   - Type the name you want to give it.
-"   - <ESC>,v
-" Example: vi(,lvariable<ESC>,v
-vmap <leader>l "vc
-nmap <leader>v viw"nyOn = v<ESC>
+nmap <leader>xl O. = "<ESC>
+
+" Extract method (only works with character-wise selections, at the moment
+nmap <leader>xm ?def<CR>jvii<ESC>jo<CR>def .<CR>"<ESC>
 
 " object && object.method
 " Note: Cursor should be on the dot between object and method
@@ -173,7 +169,6 @@ function! CamelModelName()
   return Camelize(ModelName())
 endfunction
 
-
 " ======================
 "     Tab Label
 " ======================
@@ -185,3 +180,12 @@ function! TabLabel()
     return ""
   endif
 endfunction
+
+" =======================
+"   Rails Customization
+" =======================
+
+autocmd User Rails Rnavcommand factory        spec/factories            -glob=* -suffix=_factories.rb
+autocmd User Rails Rnavcommand feature        features                  -glob=* -suffix=.feature
+autocmd User Rails Rnavcommand stepdefinition features/step_definitions -glob=* -suffix=_steps.rb
+
