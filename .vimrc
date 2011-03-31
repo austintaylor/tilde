@@ -1,7 +1,7 @@
 
-" =============
-"     Setup
-" =============
+" ------------------------------------------------------------
+"  Setup
+" ------------------------------------------------------------
 
 set nocompatible
 call pathogen#runtime_append_all_bundles()
@@ -10,9 +10,9 @@ let mapleader = ","
 let g:project_dir = "~/Workspace"
 
 
-" ============
-"   Settings
-" ============
+" ------------------------------------------------------------
+"  Settings
+" ------------------------------------------------------------
 
 set encoding=utf-8
 set nowrap
@@ -60,9 +60,9 @@ set backupdir=~/.vim/tmp
 set directory=~/.vim/tmp
 
 
-" ============
-"   Autocmd
-" ============
+" ------------------------------------------------------------
+"  Autocmd
+" ------------------------------------------------------------
 
 augroup vimrc
   " Clear autocmd
@@ -89,9 +89,9 @@ augroup vimrc
 augroup END
 
 
-" ============
-"   Mappings
-" ============
+" ------------------------------------------------------------
+"  Mappings
+" ------------------------------------------------------------
 
 " Fundamentals
 nnoremap j gj
@@ -153,9 +153,13 @@ nnoremap <leader>r :%s//
 vnoremap <leader>r "ry:%s/r/
 vnoremap <leader>f "fy:/f
 
-" =====================
-"    Snippet Support
-" =====================
+" Sections
+nmap <leader>- o<esc>60i-<esc><leader>cc0a <esc>yyppkwC<space>
+
+
+" ------------------------------------------------------------
+"  Snippet Support
+" ------------------------------------------------------------
 
 function! Camelize(name)
   return substitute(a:name, '\v%(^(.)|_(.))', '\u\1\u\2', 'g')
@@ -169,9 +173,10 @@ function! CamelModelName()
   return Camelize(ModelName())
 endfunction
 
-" ======================
-"     Tab Label
-" ======================
+
+" ------------------------------------------------------------
+"  Tab Label
+" ------------------------------------------------------------
 
 function! TabLabel()
   if exists("t:directory")
@@ -181,9 +186,9 @@ function! TabLabel()
   endif
 endfunction
 
-" =======================
-"   Rails Customization
-" =======================
+" ------------------------------------------------------------
+"  Rails Customization
+" ------------------------------------------------------------
 
 autocmd User Rails Rnavcommand factory        spec/factories            -glob=* -suffix=_factories.rb
 autocmd User Rails Rnavcommand feature        features                  -glob=* -suffix=.feature
