@@ -1,3 +1,8 @@
+snippet index
+	def	index
+		@${1:`ModelName()`s} = ${2:`CamelModelName()`.all}
+	end
+
 snippet create
 	def create
 		@${1:`ModelName()`} = ${2:`CamelModelName()`.new}(params[:$1])
