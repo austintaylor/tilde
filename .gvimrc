@@ -1,8 +1,10 @@
 
-" Make Save leave edit mode
-macmenu File.Save  key=<nop>
-map <D-s> :w<CR>
-imap <D-s> <ESC>:w<CR>
+if has('mac')
+  " Make Save leave edit mode
+  macmenu File.Save  key=<nop>
+  map <D-s> :w<CR>
+  imap <D-s> <ESC>:w<CR>
+endif
 
 " GUI settings
 set guioptions+=TlRLrb
@@ -14,3 +16,7 @@ set fuoptions=maxvert,maxhorz
 " Color scheme
 colorscheme jellybeans
 
+hi markdownCode guifg=#a0a9bf
+hi markdownCodeBlock guifg=#a0a9bf
+
+set guitablabel=%{TabLabel()}

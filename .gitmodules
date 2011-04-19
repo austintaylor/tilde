@@ -19,6 +19,30 @@
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = git://github.com/msanders/snipmate.vim.git
-[submodule "bundle/cucumber"]
-	path = bundle/cucumber
-	url = http://github.com/tpope/vim-cucumber.git
+[submodule "bundle/ack"]
+	path = bundle/ack
+	url = http://github.com/mileszs/ack.vim.git
+[submodule "bundle/repeat"]
+	path = bundle/repeat
+	url = http://github.com/tpope/vim-repeat.git
+[submodule "bundle/fugitive"]
+	path = bundle/fugitive
+	url = http://github.com/tpope/vim-fugitive.git
+[submodule "bundle/open"]
+	path = bundle/open
+	url = http://github.com/austintaylor/vim-open.git
+[submodule "bundle/choosecolor"]
+	path = bundle/choosecolor
+	url = http://github.com/austintaylor/vim-choosecolor.git
+[submodule "bundle/indentobject"]
+	path = bundle/indentobject
+	url = http://github.com/austintaylor/vim-indentobject.git
+[submodule "bundle/commaobject"]
+	path = bundle/commaobject
+	url = http://github.com/austintaylor/vim-commaobject.git
+[submodule "bundle/objectcompletion"]
+	path = bundle/objectcompletion
+	url = http://github.com/austintaylor/vim-objectcompletion.git
+[submodule "bundle/cocoa"]
+	path = bundle/cocoa
+	url = http://github.com/msanders/cocoa.vim.git
