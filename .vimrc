@@ -68,13 +68,14 @@ augroup vimrc
   " Clear autocmd
   autocmd!
 
-  " Auto-save
-  " Can't have this always trying to save unnamed buffers
-  "au FocusLost * :wa
-
-  " Recognize Capfile, Gemfile
-  au BufRead,BufNewFile Capfile set filetype=ruby
-  au BufRead,BufNewFile Gemfile set filetype=ruby
+  " Recognize special files
+  au BufRead,BufNewFile Capfile      set filetype=ruby
+  au BufRead,BufNewFile Gemfile      set filetype=ruby
+  au BufRead,BufNewFile Guardfile    set filetype=ruby
+  au BufRead,BufNewFile *.prawn      set filetype=ruby
+  au BufRead,BufNewFile config.ru    set filetype=ruby
+  au BufRead,BufNewFile *.handlebars set filetype=html
+  au BufRead,BufNewFile *.json       set filetype=javascript
 
   " Auto-reload
   au BufWritePost .vimrc source %
