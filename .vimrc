@@ -164,6 +164,8 @@ vnoremap <leader>f "fy:/f
 " Sections
 nmap <leader>- o<esc>60i-<esc><leader>cc0a <esc>yyppkwC<space>
 
+" Format XML
+vmap <leader>x :!sed -e 's/ *//' \| xmllint --format -<CR>
 
 " ------------------------------------------------------------
 "  Snippet Support
