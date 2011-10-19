@@ -9,16 +9,14 @@ snippet create
 		@$1.save!
 		redirect_to ${3:$1s_path}
 	rescue ActiveRecord::RecordInvalid
-		flash.now[:error] = @$1.errors.full_messages.to_sentence + "."
 		render :action => 'new'
 	end
 
 snippet update
 	def update
 		@${1:`ModelName()`}.update_attributes!(params[:$1])
-		redirect_to ${2:$1_path(@$1)}
+		redirect_to ${2:@$1}
 	rescue ActiveRecord::RecordInvalid
-		flash.now[:error] = @$1.errors.full_messages.to_sentence + "."
 		render :action => 'edit'
 	end
 
@@ -37,17 +35,7 @@ snippet paperclip
 	add_column :$1, :$2_content_type, :string
 	add_column :$1, :$2_file_size, :integer
 	add_column :$1, :$2_updated_at, :datetime
-snippet acrylic
-	require 'rubygems'
-	require 'acrylic'
-
-	class ${1:`Camelize(Filename())`} < ImageGenerator
-		image :${2:name} do
-			dimensions ${3:100}, ${4:100}
-			${5}
-		end
-
-		preview(:$2)
-		#suite
-	end
-
+snippet "^
+	"([^"]*)"
+snippet let
+	let(:${1}) { ${2} }
