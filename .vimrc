@@ -87,6 +87,9 @@ augroup vimrc
   " Strip trailing whitespace
   " (disabled because it was interfering with tab behavior)
   "au BufWritePre * :%s/\s\+$//e
+  
+  " close my private todo file on save
+  au BufWritePost .todo bd
 augroup END
 
 
@@ -100,6 +103,10 @@ nnoremap k gk
 nnoremap Y y$
 nnoremap Q gqip
 imap <C-D> <DEL>
+vnoremap p "0p
+
+" Open my private todo file
+nmap <leader>t :sp .todo<CR>
 
 " Scroll left/right
 nmap <C-h> zH
