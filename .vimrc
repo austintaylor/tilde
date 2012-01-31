@@ -23,6 +23,7 @@ set number
 set history=1000
 set scrolloff=3
 set ttyfast
+set autoread
 
 " No bells
 set visualbell t_vb=
@@ -104,6 +105,15 @@ nnoremap Y y$
 nnoremap Q gqip
 imap <C-D> <DEL>
 vnoremap p "0p
+noremap H ^
+noremap L g_
+
+" Command-T
+nnoremap <leader>o :CommandT<CR>
+
+" Move lines
+nnoremap <C-j> :m+<CR>==
+nnoremap <C-k> :m-2<CR>==
 
 " Open my private todo file
 nmap <leader>t :sp .todo<CR>
