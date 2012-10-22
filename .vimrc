@@ -9,7 +9,6 @@ filetype plugin indent on
 let mapleader = ","
 let g:project_dir = "~/Workspace"
 
-
 " ------------------------------------------------------------
 "  Settings
 " ------------------------------------------------------------
@@ -130,6 +129,7 @@ nnoremap <C-W><C-O> :tabnew %<CR>
 " Tree commands
 map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <leader>R :NERDTreeFind<CR>
+map <leader>e :e =system("pbpaste \| awk -F: '{print $1 \"\|\" $2}'")<CR><CR>
 
 " Ack
 nnoremap <leader>a :Ack<space>
@@ -163,8 +163,15 @@ map <leader>& mayB`ai<space>&&<space><esc>pl
 " Poor man's runner. Need some help here.
 map <D-r> :!ruby -Itest %<CR>
 
+nnoremap zp :put *<cr>`[v`]=
+
 " I do this all the time.
 command! Q :q
+command! W :w
+command! X :x
+
+" Dash
+nnoremap K :!open "dash://rails2:<cword>"<cr><cr>
 
 " Find & Replace
 nnoremap <leader>r :%s//
@@ -176,6 +183,28 @@ nmap <leader>- o<esc>60i-<esc><leader>cc0a <esc>yyppkwC<space>
 
 " Format XML
 vmap <leader>x :!sed -e 's/ *//' \| xmllint --format -<CR>
+
+function! s:Creators(args)
+  redraw
+  echo "Searching..."
+  let g:creatorsformat="%f"
+  let g:creatorsprg="./find_creators.sh ".a:args
+  let grepprg_bak=&grepprg
+  let grepformat_bak=&grepformat
+  try
+    let &grepprg=g:creatorsprg
+    let &grepformat=g:creatorsformat
+    silent execute 'grep'
+  finally
+    let &grepprg=grepprg_bak
+    let &grepformat=grepformat_bak
+  endtry
+  botright copen
+  redraw!
+endfunction
+
+command! -nargs=1 Creators call s:Creators(<q-args>)
+
 
 " ------------------------------------------------------------
 "  Snippet Support
