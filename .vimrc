@@ -97,7 +97,7 @@ augroup vimrc
   "au BufWritePre * :%s/\s\+$//e
   
   " close my private todo file on save
-  au BufWritePost .todo bd
+  " au BufWritePost .todo bd
 augroup END
 
 
