@@ -124,6 +124,7 @@ nnoremap <C-k> :m-2<CR>==
 
 " Open my private todo file
 nmap <leader>t :sp .todo<CR>
+nmap <leader><leader>t :sp ~/Dropbox/todos/global.todo<CR>
 
 " Scroll left/right
 nmap <C-h> zH
