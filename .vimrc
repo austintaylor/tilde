@@ -13,9 +13,15 @@ let g:project_dir = "~/Workspace"
 "  Settings
 " ------------------------------------------------------------
 
+syntax on
+colorscheme jellybeans
+hi markdownCode guifg=#a0a9bf
+hi markdownCodeBlock guifg=#a0a9bf
+
 set encoding=utf-8
 set nowrap
-set cursorline
+" set cursorline
+set nocursorline " this is too laggy in terminal mode
 set wildmenu
 set wildmode=list:longest
 set number
@@ -23,6 +29,8 @@ set history=1000
 set scrolloff=3
 set ttyfast
 set autoread
+set ttimeout
+set ttimeoutlen=100
 
 " No bells
 set visualbell t_vb=
@@ -79,7 +87,7 @@ augroup vimrc
 
   " Auto-reload
   au BufWritePost .vimrc source %
-  au BufWritePost .gvimrc source %
+  " au BufWritePost .gvimrc source %
 
   " Don't want cursor line highlighting in quickfix
   au QuickFixCmdPost * set nocursorline
@@ -168,7 +176,7 @@ nnoremap zp :put *<cr>`[v`]=
 " I do this all the time.
 command! Q :q
 command! W :w
-command! X :x
+" command! X :x
 
 " Dash
 nnoremap K :!open "dash://rails2:<cword>"<cr><cr>
@@ -183,6 +191,15 @@ nmap <leader>- o<esc>60i-<esc><leader>cc0a <esc>yyppkwC<space>
 
 " Format XML
 vmap <leader>x :!sed -e 's/ *//' \| xmllint --format -<CR>
+
+function! OpenLine()
+  let l:repo = substitute(system("cat .git/config | awk 'BEGIN { FS = /\s+/ }; /url =/ {print $3; exit}'"), '.git\n$', '', '')
+  let l:branch = substitute(system("git branch | awk '{print $2}'"), '\n$', '', '')
+  let l:file = expand('%')
+  let l:line = line('.')
+  let l:url = l:repo."/blob/".l:branch."/".l:file."#L".l:line
+  call system('open "'.l:url.'"')
+endfunction
 
 function! s:Creators(args)
   redraw
