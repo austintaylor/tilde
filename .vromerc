@@ -1,0 +1,16 @@
+set qm_g=http://github.com/austintaylor
+set qm_T=http://testflight.com/dashboard
+
+set qm_a=https://uservoice.uservoice.com/admin/settings
+set qm_d=https://devoncall.uservoice.com/admin/tickets
+set qm_D=http://developer.uservoice.com
+set qm_G=http://github.com/uservoice
+set qm_f=https://resque.monitor.uservoice.com/failed
+set qm_t=https://trello.com/board/product-current-development/4e6fd53e71a02bab3500bf8c
+set qm_U=http://github.com/uservoice/uservoice
+set qm_I=http://github.com/uservoice/uservoice-iphone-sdk
+set qm_b=https://uservoice.airbrake.io/projects/18489/errors
+
+set disablesites=mail.google.com, reader.google.com, trello.com
+set searchengines={"g":"http://www.google.com/search?q={{keyword}}","w":"http://en.wikipedia.org/wiki/{{keyword}}"}
+set hintkeys=jlkhfsdagwerui

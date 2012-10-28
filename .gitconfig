@@ -1,0 +1,19 @@
+[user]
+	name = 'Austin Taylor'
+  email = austin.taylor@gmail.com
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[alias]
+  ci = commit -m
+  cia = commit -am
+  st = status
+  up = !git stash && git pull && git stash pop
+  grbl = !sh -c 'git grep -n \"$1\" | awk -F: '\"'\"'{ print $2\",\"$2,$1 }'\"'\"' | xargs -n 2 git --no-pager blame -f -L' -
+[core]
+  excludesfile = /Users/austin/tilde/.gitignore
+[push]
+	default = tracking
+[log]
+  date = local

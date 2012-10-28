@@ -1,0 +1,10 @@
+--type-set=sass=.sass,.scss
+--type-set=haml=.haml
+--type-set=feature=.feature
+--type-set=coffee=.coffee
+--type-set=json=.json
+--type-set=handlebars=.handlebars
+--type-add=ruby=.builder,.as_json
+--type-add=html=.erb
+--no-xml
+--no-sql

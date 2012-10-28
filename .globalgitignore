@@ -1,0 +1,5 @@
+.todo
+.sass-cache
+.bundle
+vendor/bundle
+tmp/tags
