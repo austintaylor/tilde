@@ -112,3 +112,6 @@
 [submodule ".vim/bundle/autoclose"]
 	path = .vim/bundle/autoclose
 	url = https://github.com/Townk/vim-autoclose.git
+[submodule ".vim/bundle/objc_matchbracket"]
+	path = .vim/bundle/objc_matchbracket
+	url = https://github.com/qqshfox/objc_matchbracket.git
