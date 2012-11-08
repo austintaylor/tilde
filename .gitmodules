@@ -118,3 +118,6 @@
 [submodule ".vim/bundle/alternatefile"]
 	path = .vim/bundle/alternatefile
 	url = git://github.com/nacitar/a.vim.git
+[submodule ".vim/bundler/objc"]
+	path = .vim/bundler/objc
+	url = git://github.com/b4winckler/vim-objc.git
