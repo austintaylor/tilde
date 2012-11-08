@@ -90,7 +90,7 @@
 	url = git://github.com/kchmck/vim-coffee-script.git
 [submodule ".vim/bundle/cocoa"]
 	path = .vim/bundle/cocoa
-	url = git://github.com/msanders/cocoa.vim.git
+	url = git://github.com/zhaocai/cocoa.vim.git
 [submodule ".vim/bundle/objectcompletion"]
 	path = .vim/bundle/objectcompletion
 	url = git@github.com:austintaylor/vim-objectcompletion.git
