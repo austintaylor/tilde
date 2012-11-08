@@ -8,6 +8,7 @@ call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 let mapleader = ","
 let g:project_dir = "~/Workspace"
+let g:objc#man#dash_keyword = "ios:"
 
 " ------------------------------------------------------------
 "  Settings
