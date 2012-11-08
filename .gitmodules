@@ -115,3 +115,6 @@
 [submodule ".vim/bundle/objc_matchbracket"]
 	path = .vim/bundle/objc_matchbracket
 	url = https://github.com/qqshfox/objc_matchbracket.git
+[submodule ".vim/bundle/alternatefile"]
+	path = .vim/bundle/alternatefile
+	url = git://github.com/vim-scripts/a.vim.git
