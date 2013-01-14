@@ -1,0 +1,67 @@
+snippet ipad
+	UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+snippet str
+	NSLocalizedStringFromTable(@"${1}", @"UserVoice", nil)
+snippet r
+	CGRectMake(${1:0}, ${2:0}, ${3:width}, ${4:height})
+snippet view
+	UIView *${1:view} = [[[UIView alloc] initWithFrame:CGRectMake(${3:0}, ${4:0}, ${5:$2.bounds.size.width}, ${6:$2.bounds.size.height})] autorelease];
+	$1.autoresizingMask = ${7:UIViewAutoresizingFlexibleWidth};
+	[${2:superview} addSubview:$1];
+snippet sview
+	self.${1:view} = [[[UIView alloc] initWithFrame:CGRectMake(${3:0}, ${4:0}, ${5:$2.bounds.size.width}, ${6:$2.bounds.size.height})] autorelease];
+	self.$1.autoresizingMask = ${7:UIViewAutoresizingFlexibleWidth};
+	[${2:superview} addSubview:$1];
+snippet label
+	UILabel *${1:label} = [[[UILabel alloc] initWithFrame:CGRectMake(${3:0}, ${4:0}, ${5:$2.bounds.size.width}, ${6:$2.bounds.size.height})] autorelease];
+	$1.autoresizingMask = ${7:UIViewAutoresizingFlexibleWidth};
+	$1.backgroundColor = [UIColor ${8:clearColor}];
+	$1.textColor = [UIColor ${9:blackColor}];
+	$1.font = [UIFont systemFontOfSize:${10:}];
+	$1.text = ${11};
+	[${2:superview} addSubview:$1];
+snippet button
+	UIButton *${1:button} = [UIButton buttonWithType:${3:UIButtonTypeRoundedRect}];
+	$1.frame = CGRectMake(${4:0}, ${5:0}, ${6:$2.bounds.size.width}, ${7:$2.bounds.size.height});
+	[$1 setTitle:NSLocalizedStringFromTable(@"${8}", @"UserVoice", nil) forState:UIControlStateNormal];
+	[$1 addTarget:self action:@selector(${9}) forControlEvents:UIControlEventTouchUpInside];
+	$1.autoresizingMask = ${10:UIViewAutoresizingFlexibleWidth};
+	[${2:superview} addSubview:$1];
+snippet FW
+	UIViewAutoresizingFlexibleWidth
+snippet FH
+	UIViewAutoresizingFlexibleHeight
+snippet FT
+	UIViewAutoresizingFlexibleTopMargin
+snippet FB
+	UIViewAutoresizingFlexibleBottomMargin
+snippet FR
+	UIViewAutoresizingFlexibleRightMargin
+snippet FL
+	UIViewAutoresizingFlexibleLeftMargin
+snippet bg
+	backgroundColor = ${1:[UIColor clearColor]};
+snippet bgv
+	backgroundView = ${1:nil};
+snippet font
+	font = [UIFont systemFontOfSize:${1}];
+snippet fontb
+	font = [UIFont boldSystemFontOfSize:${1}];
+snippet arm
+	autoresizingMask = ${1:UIViewAutoresizingFlexibleWidth|}${2:UIViewAutoresizingFlexibleHeight|}${3:UIViewAutoresizingFlexibleTopMargin|}${4:UIViewAutoresizingFlexibleRightMargin|}${5:UIViewAutoresizingFlexibleBottomMargin|}${6:UIViewAutoresizingFlexibleLeftMargin};
+snippet armw
+	autoresizingMask = UIViewAutoresizingFlexibleWidth;
+snippet shadow
+	${1:view}.layer.shadowColor = [UIColor blackColor].CGColor;
+	$1.layer.shadowOffset = CGPointMake(0, 1);
+	$1.layer.shadowRadius = ${2:5.0};
+	$1.layer.shadowOpacity = ${3:0.5};
+snippet sheet
+	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:${1}
+		                                                        delegate:self
+		                                               cancelButtonTitle:NSLocalizedStringFromTable(@"Cancel", @"UserVoice", nil)
+		                                          destructiveButtonTitle:${2:nil}
+		                                               otherButtonTitles:${3}nil] autorelease];
+	[actionSheet showInView:self.view];
+snippet tap
+	[${1:view} addGestureRecognizer:[[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(${2})] autorelease]];

@@ -47,6 +47,8 @@ set tabstop=2
 set splitbelow
 set splitright
 
+set sessionoptions=blank,curdir,folds,help,tabpages,winsize
+
 " Search behavior
 set ignorecase
 set smartcase
@@ -112,12 +114,12 @@ nnoremap k gk
 nnoremap Y y$
 nnoremap Q gqip
 imap <C-D> <DEL>
+imap <C-F> <RIGHT>
+imap <C-B> <LEFT>
 vnoremap p "0p
 noremap H ^
 noremap L g_
-
-" Command-T
-nnoremap <leader>o :CommandT<CR>
+nnoremap \ ,
 
 " Move lines
 nnoremap <C-j> :m+<CR>==
@@ -146,32 +148,28 @@ nnoremap <leader>a :Ack<space>
 vnoremap <leader>a "ry:Ack<space>"r"
 
 " Reselect pasted text
-nnoremap <leader>p V`]
+nnoremap <leader>p `[v`]
 
 " TM inspired keys
 imap <C-L> <space>=><space>
-imap <D-Return> <ESC>o
 
 " Symbols and strings
 nmap <leader>: ds'ds"i:<Esc>e
 nmap <leader>" ebhxcsw"
 nmap <leader>' ebhxcsw'
 
-" Color Picker
-nmap <leader>c :ChooseColor<CR>
-
 " Extract local variable
 nmap <leader>xl O. = "<ESC>
 
-" Extract method (only works with character-wise selections, at the moment
+" Extract method (only works with character-wise selections, at the moment)
 nmap <leader>xm ?def<CR>jvii<ESC>jo<CR>def .<CR>"<ESC>
 
 " object && object.method
 " Note: Cursor should be on the dot between object and method
 map <leader>& mayB`ai<space>&&<space><esc>pl
 
-" Poor man's runner. Need some help here.
-map <D-r> :!ruby -Itest %<CR>
+" Add semicolon
+nmap <leader>; ma:s/;\?$/;/\|let @/=''<CR>`a
 
 nnoremap zp :put *<cr>`[v`]=
 
@@ -189,10 +187,23 @@ vnoremap <leader>r "ry:%s/r/
 vnoremap <leader>f "fy:/f
 
 " Sections
-nmap <leader>- o<esc>60i-<esc><leader>cc0a <esc>yyppkwC<space>
+nmap <leader>- o<esc>60i-<esc>\\\yyppkwC<space>
 
 " Format XML
 vmap <leader>x :!sed -e 's/ *//' \| xmllint --format -<CR>
+
+" Open
+nmap <leader>o "oyiW:!open o<cr><cr>
+
+" ------------------------------------------------------------
+"  obj-c stuff
+" ------------------------------------------------------------
+
+" Upgrade a local var to a property
+nmap <leader><leader>p vf*e"aymacf*self.:w,A/\@inter$%Oa;/\@prop}O@property (nonatomic, retain) a;h"byiw:w,Agg/\@syn}O@synthesize b;/super deallocOself.b = nil;:w`a
+
+" Declare a method in the header
+nmap <leader><leader>m 0vt{ge"ayma,A/prop}oa;:w,A`a
 
 function! OpenLine()
   let l:repo = substitute(system("cat .git/config | awk 'BEGIN { FS = /\s+/ }; /url =/ {print $3; exit}'"), '.git\n$', '', '')
