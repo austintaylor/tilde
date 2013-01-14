@@ -1,0 +1,7 @@
+#!/usr/bin/ruby
+
+str = `osascript -ss -e 'tell application "iTunes" to {artist, album, name, track number} of current track'`
+str.sub!(/^\{/, '[').sub!(/\}$/, ']')
+artist, album, name, number = eval(str)
+
+puts "[#{number}] #{name}"
