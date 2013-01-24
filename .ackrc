@@ -6,5 +6,9 @@
 --type-set=handlebars=.handlebars
 --type-add=ruby=.builder,.as_json
 --type-add=html=.erb
+--ignore-dir=public/stylesheets/customer
+--ignore-dir=public/customer
+--ignore-dir=public/packages
+--ignore-dir=vendor
 --no-xml
 --no-sql
