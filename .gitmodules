@@ -121,3 +121,6 @@
 [submodule ".vim/bundler/objc"]
 	path = .vim/bundler/objc
 	url = git://github.com/b4winckler/vim-objc.git
+[submodule ".vim/bundle/fakeclip"]
+	path = .vim/bundle/fakeclip
+	url = git://github.com/kana/vim-fakeclip.git
