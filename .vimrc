@@ -70,6 +70,9 @@ endif
 set backupdir=~/.vim/tmp
 set directory=~/.vim/tmp
 
+" matchparen is slow in the terminal
+let loaded_matchparen = 1
+
 
 " ------------------------------------------------------------
 "  Autocmd
