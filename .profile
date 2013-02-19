@@ -53,3 +53,7 @@ function ip() {
 complete -W '$(ls `pwd`/log)' log
 complete -W '$(grep "Host " ~/.ssh/config  | sed -e "s/Host //")' ssh
 # complete -W '$(git status --porcelain | sed "s/...//")' git add
+
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
