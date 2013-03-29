@@ -1,0 +1,25 @@
+tmux has-session -t dev
+if [ $? != 0 ]
+then
+  tmux new-session -s dev -n ios -d
+  tmux send-keys    -t dev:ios 'cd ~/Workspace/ios' C-m
+  tmux send-keys    -t dev:ios 'vi README.md' C-m
+  tmux split-window -t dev:ios -c ~/Workspace/ios -v -p 10
+
+  tmux new-window -n uv -t dev -c ~/Workspace/uservoice
+  tmux send-keys    -t dev:uv 'vi README.md' C-m
+  tmux send-keys    -t dev:uv ',d' C-w l
+  tmux split-window -t dev:uv -c ~/Workspace/uservoice -v -p 10
+
+  tmux new-window -n local -t dev -c ~/Workspace/uservoice
+  tmux send-keys -t    dev:local.0 'CACHE_CLASSES=yes script/server thin' C-m
+  tmux split-window -t dev:local.0 -h -p 5
+  tmux send-keys -t    dev:local.1 '/usr/bin/memcached -vv -m 64 -p 11211 -l localhost >/dev/null 2>/dev/null' C-m
+
+  tmux new-window -n ssh -t dev
+
+  tmux new-window -n tilde -t dev -c ~/tilde
+  tmux send-keys -t dev:tilde 'vi README.markdown' C-m
+  tmux send-keys -t dev:tilde ',dI' C-w l
+fi
+tmux attach -t dev
