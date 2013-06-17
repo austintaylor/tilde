@@ -57,8 +57,8 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
-nnoremap / /\v
-vnoremap / /\v
+nnoremap / /\V
+vnoremap / /\V
 map <leader><space> :let @/=''<cr>
 
 " Persistent undo
