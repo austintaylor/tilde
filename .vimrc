@@ -9,6 +9,7 @@ filetype plugin indent on
 let mapleader = ","
 let g:project_dir = "~/Workspace"
 let g:objc#man#dash_keyword = "ios:"
+let g:ctrlp_cmd = 'CtrlPMRUFiles'
 
 " ------------------------------------------------------------
 "  Settings
