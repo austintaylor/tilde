@@ -32,6 +32,7 @@ set ttyfast
 set autoread
 set ttimeout
 set ttimeoutlen=100
+set backspace=2
 
 " No bells
 set visualbell t_vb=
