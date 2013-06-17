@@ -125,10 +125,6 @@ noremap H ^
 noremap L g_
 nnoremap \ ,
 
-" Move lines
-nnoremap <C-j> :m+<CR>==
-nnoremap <C-k> :m-2<CR>==
-
 " Open my private todo file
 nmap <leader>t :sp .todo<CR>
 nmap <leader><leader>t :sp ~/Dropbox/todos/global.todo<CR>
