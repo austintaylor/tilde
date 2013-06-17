@@ -182,7 +182,7 @@ command! W :w
 " command! X :x
 
 " Dash
-nnoremap K :!open "dash://rails2:<cword>"<cr><cr>
+nnoremap K :!open "dash://<cword>"<cr><cr>
 
 " Find & Replace
 nnoremap <leader>r :%s//
