@@ -2,4 +2,5 @@
 .sass-cache
 .bundle
 vendor/bundle
+vendor/ruby
 tags
