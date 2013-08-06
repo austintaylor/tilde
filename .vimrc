@@ -49,6 +49,7 @@ let mapleader = ","
 let g:project_dir = "~/Workspace"
 let g:objc#man#dash_keyword = "ios:"
 let g:ctrlp_cmd = 'CtrlPMRUFiles'
+let g:ctrlp_mruf_relative=1
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_enable_signs=1
 let g:dash_map = {
