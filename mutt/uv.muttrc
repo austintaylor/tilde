@@ -1,0 +1,10 @@
+set from       = "Austin Taylor <austin@uservoice.com>"
+set realname   = "Austin Taylor"
+set signature  = ~/tilde/mutt/sig/uv.sig
+set folder     = ~/.mail/austin-uservoice.com
+set spoolfile  = +INBOX
+set record     = +sent
+set postponed  = +drafts
+set mbox       = +archive
+mailboxes +INBOX +sent +drafts +archive +Nagios
+color status white orange

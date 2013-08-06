@@ -1,0 +1,10 @@
+set from       = "Austin Taylor <austin.taylor@gmail.com>"
+set realname   = "Austin Taylor"
+set signature  = ~/tilde/mutt/sig/personal.sig
+set folder     = ~/.mail/austin.taylor-gmail.com
+set spoolfile  = +INBOX
+set record     = +sent
+set postponed  = +drafts
+set mbox       = +archive
+mailboxes +INBOX +sent +drafts +archive +tmux
+color status white blue
