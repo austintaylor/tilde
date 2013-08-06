@@ -2,5 +2,4 @@
 .sass-cache
 .bundle
 vendor/bundle
-tmp/tags
-doc/tags
+tags
