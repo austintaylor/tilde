@@ -24,6 +24,7 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'nacitar/a.vim'
 Bundle 'qqshfox/objc_matchbracket'
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
@@ -38,14 +39,16 @@ Bundle 'oscarh/vimerl'
 
 filetype plugin indent on
 
+" ------------------------------------------------------------
+"  Settings
+" ------------------------------------------------------------
+
 let mapleader = ","
 let g:project_dir = "~/Workspace"
 let g:objc#man#dash_keyword = "ios:"
 let g:ctrlp_cmd = 'CtrlPMRUFiles'
-
-" ------------------------------------------------------------
-"  Settings
-" ------------------------------------------------------------
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_enable_signs=1
 
 syntax on
 colorscheme jellybeans
