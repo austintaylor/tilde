@@ -52,8 +52,10 @@ let g:ctrlp_cmd = 'CtrlPMRUFiles'
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_enable_signs=1
 let g:dash_map = {
-    \ 'ruby'       : 'rails',
-    \ 'javascript' : 'backbone'
+    \ 'ruby'       : '_rails',
+    \ 'javascript' : '_js',
+    \ 'scss'       : '_css',
+    \ 'eruby'      : '_html'
     \ }
 
 syntax on
@@ -131,6 +133,7 @@ augroup vimrc
   au BufRead,BufNewFile config.ru    set filetype=ruby
   au BufRead,BufNewFile *.handlebars set filetype=html
   au BufRead,BufNewFile *.json       set filetype=javascript
+  au BufRead,BufNewFile *.js.erb     set filetype=javascript
 
   " Auto-reload
   au BufWritePost .vimrc source %
