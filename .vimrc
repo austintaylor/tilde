@@ -4,8 +4,40 @@
 " ------------------------------------------------------------
 
 set nocompatible
-call pathogen#runtime_append_all_bundles()
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+
+Bundle 'Townk/vim-autoclose'
+Bundle 'austintaylor/vim-commaobject'
+Bundle 'austintaylor/vim-indentobject'
+Bundle 'austintaylor/vim-objectcompletion'
+Bundle 'b4winckler/vim-objc'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'kana/vim-fakeclip'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'kien/ctrlp.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'msanders/snipmate.vim'
+Bundle 'nacitar/a.vim'
+Bundle 'qqshfox/objc_matchbracket'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'zhaocai/cocoa.vim'
+Bundle 'epeli/slimux'
+Bundle 'oscarh/vimerl'
+
 filetype plugin indent on
+
 let mapleader = ","
 let g:project_dir = "~/Workspace"
 let g:objc#man#dash_keyword = "ios:"
@@ -81,10 +113,8 @@ let loaded_matchparen = 1
 " ------------------------------------------------------------
 
 augroup vimrc
-  " Clear autocmd
   autocmd!
 
-  " Recognize special files
   au BufRead,BufNewFile Capfile      set filetype=ruby
   au BufRead,BufNewFile Gemfile      set filetype=ruby
   au BufRead,BufNewFile Guardfile    set filetype=ruby
@@ -95,19 +125,22 @@ augroup vimrc
 
   " Auto-reload
   au BufWritePost .vimrc source %
-  " au BufWritePost .gvimrc source %
-
-  " Don't want cursor line highlighting in quickfix
-  au QuickFixCmdPost * set nocursorline
 
   " Strip trailing whitespace
   " (disabled because it was interfering with tab behavior)
   "au BufWritePre * :%s/\s\+$//e
-  
-  " close my private todo file on save
-  " au BufWritePost .todo bd
 augroup END
 
+" Reload things
+set autoread updatetime=2000
+augroup checktime
+    autocmd!
+    if !has("gui_running")
+        autocmd BufEnter        * silent! checktime
+        autocmd CursorHold      * silent! checktime
+        autocmd CursorHoldI     * silent! checktime
+    endif
+augroup END
 
 " ------------------------------------------------------------
 "  Mappings
@@ -153,6 +186,9 @@ nnoremap <leader>p `[v`]
 
 " TM inspired keys
 imap <C-L> <space>=><space>
+
+" uppercase
+imap <c-u> <esc>viwUgv<esc>a
 
 " Symbols and strings
 nmap <leader>: ds'ds"i:<Esc>e
