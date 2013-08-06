@@ -11,6 +11,7 @@
   st = status
   up = !git stash && git pull && git stash pop
   grbl = !sh -c 'git grep -n \"$1\" | awk -F: '\"'\"'{ print $2\",\"$2,$1 }'\"'\"' | xargs -n 2 git --no-pager blame -f -L' -
+  back = !git reflog | grep checkout | head -1 | awk '{ print $6 }' | xargs git checkout
 [core]
   excludesfile = /Users/austin/tilde/.globalgitignore
 [push]
