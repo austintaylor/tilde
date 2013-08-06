@@ -36,6 +36,8 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'zhaocai/cocoa.vim'
 Bundle 'epeli/slimux'
 Bundle 'oscarh/vimerl'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
 
 filetype plugin indent on
 
@@ -49,6 +51,10 @@ let g:objc#man#dash_keyword = "ios:"
 let g:ctrlp_cmd = 'CtrlPMRUFiles'
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_enable_signs=1
+let g:dash_map = {
+    \ 'ruby'       : 'rails',
+    \ 'javascript' : 'backbone'
+    \ }
 
 syntax on
 colorscheme jellybeans
@@ -219,7 +225,7 @@ command! W :w
 " command! X :x
 
 " Dash
-nnoremap K :!open "dash://<cword>"<cr><cr>
+nmap <silent> K <Plug>DashSearch
 
 " Find & Replace
 nnoremap <leader>r :%s//
