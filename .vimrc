@@ -46,18 +46,6 @@ filetype plugin indent on
 " ------------------------------------------------------------
 
 let mapleader = ","
-let g:project_dir = "~/Workspace"
-let g:objc#man#dash_keyword = "ios:"
-let g:ctrlp_cmd = 'CtrlPMRUFiles'
-let g:ctrlp_mruf_relative=1
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_enable_signs=1
-let g:dash_map = {
-    \ 'ruby'       : '_rails',
-    \ 'javascript' : '_js',
-    \ 'scss'       : '_css',
-    \ 'eruby'      : '_html'
-    \ }
 
 syntax on
 colorscheme jellybeans
@@ -119,6 +107,23 @@ set directory=~/.vim/tmp
 " matchparen is slow in the terminal
 let loaded_matchparen = 1
 
+" ------------------------------------------------------------
+"  Plugin options
+" ------------------------------------------------------------
+
+let g:ctrlp_cmd = 'CtrlPMRUFiles'
+let g:ctrlp_mruf_relative=1
+
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_enable_signs=1
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': [] }
+
+let g:dash_map = {
+    \ 'ruby'       : '_rails',
+    \ 'javascript' : '_js',
+    \ 'scss'       : '_css',
+    \ 'eruby'      : '_html' }
 
 " ------------------------------------------------------------
 "  Autocmd
