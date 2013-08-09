@@ -1,0 +1,18 @@
+# MS Word documents
+application/msword; ~/tilde/mutt/view_attachment.sh %s "-" '/Applications/TextEdit.app'
+
+# Images
+image/jpg; ~/tilde/mutt/view_attachment.sh %s jpg
+image/jpeg; ~/tilde/mutt/view_attachment.sh %s jpg
+image/pjpeg; ~/tilde/mutt/view_attachment.sh %s jpg
+image/png; ~/tilde/mutt/view_attachment.sh %s png
+image/gif; ~/tilde/mutt/view_attachment.sh %s gif
+
+# PDFs
+application/pdf; ~/tilde/mutt/view_attachment.sh %s pdf
+
+# HTML
+text/html; ~/tilde/mutt/view_attachment.sh %s html
+
+# Unidentified files
+application/octet-stream; ~/tilde/mutt/view_attachment.sh %s "-"

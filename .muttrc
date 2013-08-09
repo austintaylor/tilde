@@ -1,12 +1,11 @@
 # Paths ----------------------------------------------
-set folder           = ~/.mail               # mailbox location
+set folder           = ~/.mail
 set alias_file       = ~/tilde/mutt/alias    # where to store aliases
 set header_cache     = ~/.mutt/cache/headers # where to store headers
 set message_cachedir = ~/.mutt/cache/bodies  # where to store bodies
 set certificate_file = ~/.mutt/certificates  # where to store certs
 set mailcap_path     = ~/tilde/mutt/mailcap  # entries for filetypes
 set tmpdir           = ~/.mutt/temp          # where to keep temp files
-set signature        = ~/tilde/mutt/sig/uv.sig
 
 # Basic Options --------------------------------------
 set wait_key = no        # shut up, mutt
@@ -21,12 +20,23 @@ unset mark_old           # read/new is good enough for me
 set beep_new             # bell on new mails
 set pipe_decode          # strip headers and eval mimes when piping
 set thorough_search      # strip headers and eval mimes before searching
+set realname = "Austin Taylor"
 
 # Sidebar Patch --------------------------------------
 set sidebar_delim   = '  │'
-set sidebar_visible = yes
-set sidebar_width   = 24
+set sidebar_visible = no
+set sidebar_width   = 50
 color sidebar_new color221 color233
+bind pager > sidebar-next
+bind index > sidebar-next
+bind pager < sidebar-prev
+bind index < sidebar-prev
+bind pager , sidebar-open
+bind index , sidebar-open
+ 
+# b toggles sidebar visibility
+macro index b '<enter-command>toggle sidebar_visible<enter>'
+macro pager b '<enter-command>toggle sidebar_visible<enter>'
 
 # Status Bar -----------------------------------------
 set status_chars  = " *%A"
@@ -38,9 +48,71 @@ unignore from: to: cc: date: subject:   # show only these
 unhdr_order *                           # some distros order things by default
 hdr_order from: to: cc: date: subject:  # and in this order
 
+# Index View Options ---------------------------------
+set index_format = "[%Z]  %D  %-20.20F  %s"
+set sort = threads                         # like gmail
+set sort_aux = reverse-last-date-received  # like gmail
+set uncollapse_jump                        # don't collapse on an unread message
+set sort_re                                # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+# Index Key Bindings ---------------------------------
+bind index gg       first-entry
+bind index G        last-entry
+
+bind index R        group-reply
+bind index <tab>    sync-mailbox
+bind index <space>  collapse-thread
+
+# Ctrl-R to mark all as read
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+
+# Sync email
+macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
+
+# Saner copy/move dialogs
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+
+# Pager View Options ---------------------------------
+set pager_index_lines = 10 # number of index lines to show
+set pager_context = 3      # number of context lines to show
+set pager_stop             # don't go to next message automatically
+set menu_scroll            # scroll in menus
+set tilde                  # show tildes like in vim
+unset markers              # no ugly plus signs
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/plain text/enriched text/html
+
+# Pager Key Bindings ---------------------------------
+bind pager k  previous-line
+bind pager j  next-line
+bind pager gg top
+bind pager G  bottom
+
+bind pager R  group-reply
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+
+# View attachments properly.
+bind attach <return> view-mailcap
+
 # Account Settings -----------------------------------
+mailboxes +austin.taylor-gmail.com/INBOX \
+          +austin.taylor-gmail.com/drafts \
+          +austin.taylor-gmail.com/sent \
+          +austin.taylor-gmail.com/archive \
+          +austin.taylor-gmail.com/tmux \
+          +austin-uservoice.com/INBOX \
+          +austin-uservoice.com/drafts \
+          +austin-uservoice.com/sent \
+          +austin-uservoice.com/archive \
+          +austin-uservoice.com/Nagios
 
-folder-hook ~/.mail/austin.taylor-gmail.com/* source ~/tmux/mutt/personal.muttrc
-folder-hook ~/.mail/austin-uservoice.com/*    source ~/tmux/mutt/uv.muttrc
+folder-hook ~/.mail/austin.taylor-gmail.com/* source ~/tilde/mutt/personal.muttrc
+folder-hook ~/.mail/austin-uservoice.com/*    source ~/tilde/mutt/uv.muttrc
 
-source ~/tmux/mutt/personal.muttrc
+macro index gw "<change-folder>~/.mail/austin-uservoice.com/INBOX<enter>"
+macro index gh "<change-folder>~/.mail/austin.taylor-gmail.com/INBOX<enter>"
+
+source ~/tilde/mutt/personal.muttrc
