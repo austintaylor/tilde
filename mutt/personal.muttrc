@@ -4,4 +4,5 @@ set spoolfile  = +austin.taylor-gmail.com/INBOX
 set record     = +austin.taylor-gmail.com/sent
 set postponed  = +austin.taylor-gmail.com/drafts
 set mbox       = +austin.taylor-gmail.com/archive
+set sendmail   = "/usr/local/bin/msmtp -a personal"
 color status cyan black

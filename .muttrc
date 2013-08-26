@@ -21,6 +21,8 @@ set beep_new             # bell on new mails
 set pipe_decode          # strip headers and eval mimes when piping
 set thorough_search      # strip headers and eval mimes before searching
 set realname = "Austin Taylor"
+unset record
+set sendmail_wait = 0
 
 # Sidebar Patch --------------------------------------
 set sidebar_delim   = '  │'
@@ -116,3 +118,21 @@ macro index gw "<change-folder>~/.mail/austin-uservoice.com/INBOX<enter>"
 macro index gh "<change-folder>~/.mail/austin.taylor-gmail.com/INBOX<enter>"
 
 source ~/tilde/mutt/personal.muttrc
+
+# Compose View Options -------------------------------
+set envelope_from                    # which from?
+set sig_dashes                       # dashes before sig
+set edit_headers                     # show headers when composing
+set fast_reply                       # skip to compose when replying
+set askcc                            # ask for CC:
+set fcc_attach                       # save attachments with the body
+unset mime_forward                   # forward attachments as part of body
+set forward_format = "Fwd: %s"       # format of subject when forwarding
+set forward_decode                   # decode when forwarding
+set attribution = "On %d, %n wrote:" # format of quoting header
+set reply_to                         # reply to Reply to: field
+set reverse_name                     # reply as whomever it was to
+set include                          # include message in replies
+set forward_quote                    # include message in forwards
+set editor = "vim"        # Use terminal Vim to compose email.
+bind compose p postpone-message
