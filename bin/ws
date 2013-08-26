@@ -1,9 +1,10 @@
 tmux has-session -t dev
 if [ $? != 0 ]
 then
-  tmux new-session -s dev -n ios -d
-  tmux send-keys    -t dev:ios 'cd ~/Workspace/ios' C-m
-  tmux send-keys    -t dev:ios 'vi README.md' C-m
+  /usr/bin/memcached -vv -m 64 -p 11211 -l localhost >/dev/null 2>/dev/null &
+
+  tmux new-session -s dev -n ios -c ~/Workspace/ios -d
+  tmux send-keys    -t dev:ios 'vi' C-m
   tmux split-window -t dev:ios -c ~/Workspace/ios -v -p 10
 
   tmux new-window -n uv -t dev -c ~/Workspace/uservoice
@@ -12,19 +13,17 @@ then
   tmux split-window -t dev:uv -c ~/Workspace/uservoice -v -p 10
 
   tmux new-window -n local -t dev -c ~/Workspace/uservoice
-  tmux send-keys -t    dev:local.0 'CACHE_CLASSES=yes script/server thin' C-m
-  tmux split-window -t dev:local.0 -h -p 5
-  tmux send-keys -t    dev:local.1 '/usr/bin/memcached -vv -m 64 -p 11211 -l localhost >/dev/null 2>/dev/null' C-m
+  tmux send-keys -t dev:local 'CACHE_CLASSES=yes script/server thin' C-m
 
   tmux new-window -n ssh -t dev
 
-  tmux new-window -n tilde -t dev -c ~/tilde
-  tmux send-keys -t dev:tilde 'vi README.markdown' C-m
-  tmux send-keys -t dev:tilde ',dI' C-w l
+  tmux new-window -n '~' -t dev -c ~/tilde
+  tmux send-keys -t 'dev:~'  ''vi README.markdown' C-m
+  tmux send-keys -t 'dev:~' ',dI' C-w l
 
   tmux new-window -n mutt -t dev -c ~
   tmux send-keys     -t dev:mutt.0 'mutt -e "source ~/tilde/mutt/uv.muttrc"'
-  tmux split-window  -t dev:mutt.0 -v
+  tmux split-window  -t dev:mutt.0 -h
   tmux send-keys     -t dev:mutt.1 'mutt -e "source ~/tilde/mutt/personal.muttrc"'
 fi
 tmux attach -t dev
