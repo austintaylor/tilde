@@ -21,5 +21,10 @@ then
   tmux new-window -n tilde -t dev -c ~/tilde
   tmux send-keys -t dev:tilde 'vi README.markdown' C-m
   tmux send-keys -t dev:tilde ',dI' C-w l
+
+  tmux new-window -n mutt -t dev -c ~
+  tmux send-keys     -t dev:mutt.0 'mutt -e "source ~/tilde/mutt/uv.muttrc"'
+  tmux split-window  -t dev:mutt.0 -v
+  tmux send-keys     -t dev:mutt.1 'mutt -e "source ~/tilde/mutt/personal.muttrc"'
 fi
 tmux attach -t dev
