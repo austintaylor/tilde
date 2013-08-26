@@ -14,6 +14,7 @@
   back = !git reflog | grep checkout | head -1 | awk '{ print $6 }' | xargs git checkout
 [core]
   excludesfile = /Users/austin/tilde/.globalgitignore
+	editor = /usr/bin/vim
 [push]
 	default = tracking
 [log]

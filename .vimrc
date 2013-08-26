@@ -39,6 +39,8 @@ Bundle 'oscarh/vimerl'
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 
+let g:loaded_syntastic_plugin = 1
+
 filetype plugin indent on
 
 " ------------------------------------------------------------
