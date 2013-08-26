@@ -58,3 +58,7 @@ complete -W '$(grep "Host " ~/.ssh/config  | sed -e "s/Host //")' ssh
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
+
+function restart() {
+  tmux send-keys -t dev:local.0 C-c 'CACHE_CLASSES=yes script/server thin' C-m
+}
