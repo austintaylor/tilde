@@ -25,6 +25,7 @@ type = Gmail
 remoteuser = austin.taylor@gmail.com
 remotepasseval = get_keychain_pass(account="austin.taylor@gmail.com", server="imap.gmail.com")
 realdelete = no
+cert_fingerprint = b0ba392bba326e6feb1add4d04fa0fb86cd173fa
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Sent Mail': 'sent',
                             '[Gmail]/Starred':   'flagged',
@@ -56,6 +57,7 @@ type = Gmail
 remoteuser = austin@uservoice.com
 remotepasseval = get_keychain_pass(account="austin@uservoice.com", server="imap.gmail.com")
 realdelete = no
+cert_fingerprint = b0ba392bba326e6feb1add4d04fa0fb86cd173fa
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Sent Mail': 'sent',
                             '[Gmail]/Starred':   'flagged',
