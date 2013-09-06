@@ -6,3 +6,7 @@ set postponed  = +austin.taylor-gmail.com/drafts
 set mbox       = +austin.taylor-gmail.com/archive
 set sendmail   = "/usr/local/bin/msmtp -a personal"
 color status cyan black
+ignore *
+unignore from to cc date subject
+unhdr_order *
+hdr_order from to cc date subject

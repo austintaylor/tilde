@@ -6,3 +6,7 @@ set postponed  = +austin-uservoice.com/drafts
 set mbox       = +austin-uservoice.com/archive
 set sendmail   = "/usr/local/bin/msmtp -a uv"
 color status red black
+ignore *
+unignore from to cc date subject
+unhdr_order *
+hdr_order from to cc date subject
