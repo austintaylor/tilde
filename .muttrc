@@ -24,18 +24,6 @@ set realname = "Austin Taylor"
 unset record
 set sendmail_wait = 0
 
-# Sidebar Patch --------------------------------------
-set sidebar_delim   = '  │'
-set sidebar_visible = no
-set sidebar_width   = 50
-color sidebar_new color221 color233
-bind pager > sidebar-next
-bind index > sidebar-next
-bind pager < sidebar-prev
-bind index < sidebar-prev
-bind pager , sidebar-open
-bind index , sidebar-open
- 
 # b toggles sidebar visibility
 macro index b '<enter-command>toggle sidebar_visible<enter>'
 macro pager b '<enter-command>toggle sidebar_visible<enter>'
@@ -98,6 +86,10 @@ macro pager \Cu "|urlview<enter>" "call urlview to open links"
 
 # View attachments properly.
 bind attach <return> view-mailcap
+
+# Notmuch searching ----------------------------------
+
+macro index S "<enter-command>unset wait_key<enter><shell-escape>python ~/tilde/mutt/mutt-notmuch-py.py -G ~/.mail/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" "search mail (using notmuch)"
 
 # Account Settings -----------------------------------
 mailboxes +austin.taylor-gmail.com/INBOX \
