@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'kindle_highlights'
+require 'htmlentities'
+require 'json'
+
+if `sudo -u austin /usr/bin/security -v find-internet-password -g -a austin.taylor@gmail.com -s www.amazon.com /Users/austin/Library/Keychains/login.keychain | grep ^password:` =~ /^password: "(.*)"$/
+  password = $1
+end
+html = HTMLEntities.new
+kindle = KindleHighlights::Client.new("austin.taylor@gmail.com", password)
+highlights = []
+kindle.books.each do |key, title|
+  kindle.highlights_for(key).each do |highlight|
+    highlight["book"] = html.decode(title)
+    highlight["highlight"] = html.decode(highlight["highlight"])
+    highlights << highlight
+  end
+end
+
+File.open("/Users/austin/highlights.json", "w+") do |fp| 
+  fp << highlights.to_json
+end
