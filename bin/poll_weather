@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+require 'open-uri'
+loc = `whereami | tail -4 | head -2 | tr '\n' ' ' | awk '{ print $2","$4 }'`
+key = 'd281ddbbd3d67ec3cae2e6b4e90a04a7'
+url = "https://api.forecast.io/forecast/#{key}/#{loc}"
+json = open(URI.parse(url)).read
+IO.write("/Users/austin/.current_weather", json)

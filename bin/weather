@@ -1,13 +1,9 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
 
-require 'open-uri'
 require 'json'
 
-loc = '35.776705,-78.63915'
-key = 'd281ddbbd3d67ec3cae2e6b4e90a04a7'
-url = "https://api.forecast.io/forecast/#{key}/#{loc}"
-json = open(URI.parse(url)).read
+json = IO.read("/Users/austin/.current_weather")
 data = JSON.parse(json)['currently']
 icons = {
   'clear-day' => '☀️ ',
