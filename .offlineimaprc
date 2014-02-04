@@ -4,6 +4,10 @@ accounts = Personal, UserVoice
 pythonfile = ~/tilde/mutt/offlineimap.py
 fsync = false
 
+[notifications]
+notifier = terminal-notifier -message {body} -title {summary} -source com.apple.Mail
+max = 3
+
 [Account Personal]
 localrepository = Personal-Local
 remoterepository = Personal-Remote
