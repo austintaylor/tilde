@@ -17,7 +17,6 @@ set delete               # don't ask, just do
 unset confirmappend      # don't ask, just do!
 set quit                 # don't ask, just do!!
 unset mark_old           # read/new is good enough for me
-set beep_new             # bell on new mails
 set pipe_decode          # strip headers and eval mimes when piping
 set thorough_search      # strip headers and eval mimes before searching
 set realname = "Austin Taylor"
@@ -49,6 +48,8 @@ set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 # Index Key Bindings ---------------------------------
 bind index gg       first-entry
 bind index G        last-entry
+bind index \Cd half-down
+bind index \Cu half-up
 
 bind index R        group-reply
 bind index <tab>    sync-mailbox
@@ -76,13 +77,13 @@ set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 alternative_order text/plain text/enriched text/html
 
 # Pager Key Bindings ---------------------------------
-bind pager k  previous-line
-bind pager j  next-line
+bind pager \Cd half-down
+bind pager \Cu half-up
 bind pager gg top
 bind pager G  bottom
 
 bind pager R  group-reply
-macro pager \Cu "|urlview<enter>" "call urlview to open links"
+macro pager \Ci "|urlview<enter>" "call urlview to open links"
 
 # View attachments properly.
 bind attach <return> view-mailcap
