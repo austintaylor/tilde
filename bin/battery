@@ -1,0 +1,6 @@
+charging=$(ioreg -c AppleSmartBattery | grep '"IsCharging" = Yes')
+if [ "$charging" == "" ]; then
+  ioreg -c AppleSmartBattery | grep -i capacity | tr '\n' ' | ' | awk '{printf("🔋 %.f%%", $10/$5 * 100)}'
+else
+  ioreg -c AppleSmartBattery | grep -i capacity | tr '\n' ' | ' | awk '{printf("⚡️ %.f%%", $10/$5 * 100)}'
+fi
