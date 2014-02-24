@@ -62,3 +62,6 @@ fi
 function restart() {
   tmux send-keys -t dev:local.0 C-c 'CACHE_CLASSES=yes script/server thin' C-m
 }
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
