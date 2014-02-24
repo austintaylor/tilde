@@ -88,6 +88,9 @@ macro pager \Ci "|urlview<enter>" "call urlview to open links"
 # View attachments properly.
 bind attach <return> view-mailcap
 
+macro pager V "v/html<return><return>q" "open html part"
+macro index V 'v/html<return><return>q' "open html part"
+
 # Notmuch searching ----------------------------------
 
 macro index S "<enter-command>unset wait_key<enter><shell-escape>python ~/tilde/mutt/mutt-notmuch-py.py -G ~/.mail/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" "search mail (using notmuch)"
@@ -102,13 +105,26 @@ mailboxes +austin.taylor-gmail.com/INBOX \
           +austin-uservoice.com/drafts \
           +austin-uservoice.com/sent \
           +austin-uservoice.com/archive \
-          +austin-uservoice.com/Nagios
+          +austin-uservoice.com/Nagios \
+          +austin-courtyardapp.com/INBOX \
+          +austin-courtyardapp.com/drafts \
+          +austin-courtyardapp.com/sent \
+          +austin-courtyardapp.com/archive \
+          +austin-courtyardapp.com/trash \
+          +austin-courtyardapp.com/Airbrakes \
+          +austin-courtyardapp.com/Import \
+          +austin-courtyardapp.com/Pingdom \
+          +austin-courtyardapp.com/Receipts \
+          +austin-courtyardapp.com/Support \
+          +austin-courtyardapp.com/Voicemail
 
 folder-hook ~/.mail/austin.taylor-gmail.com/* source ~/tilde/mutt/personal.muttrc
 folder-hook ~/.mail/austin-uservoice.com/*    source ~/tilde/mutt/uv.muttrc
+folder-hook ~/.mail/austin-courtyardapp.com/*    source ~/tilde/mutt/courtyard.muttrc
 
 macro index gw "<change-folder>~/.mail/austin-uservoice.com/INBOX<enter>"
 macro index gh "<change-folder>~/.mail/austin.taylor-gmail.com/INBOX<enter>"
+macro index gc "<change-folder>~/.mail/austin-courtyardapp.com/INBOX<enter>"
 
 source ~/tilde/mutt/personal.muttrc
 
@@ -127,5 +143,5 @@ set reply_to                         # reply to Reply to: field
 set reverse_name                     # reply as whomever it was to
 set include                          # include message in replies
 set forward_quote                    # include message in forwards
-set editor = "vim -c 'set tw=0 wrap lbr'"
+set editor = "vim -c 'set tw=0 wrap lbr spell nonumber ls=0 | norm }'"
 bind compose p postpone-message

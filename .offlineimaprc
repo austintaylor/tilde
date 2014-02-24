@@ -1,6 +1,6 @@
 [general]
 ui = ttyui
-accounts = Personal, UserVoice
+accounts = Personal, UserVoice, Courtyard
 pythonfile = ~/tilde/mutt/offlineimap.py
 fsync = false
 
@@ -76,4 +76,33 @@ folderfilter = lambda folder: folder not in ['[Gmail]/Trash',
                                              'Follow up',
                                              'Misc',
                                              '[Gmail]/Spam']
+
+[Account Courtyard]
+localrepository = Courtyard-Local
+remoterepository = Courtyard-Remote
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository Courtyard-Local]
+type = Maildir
+localfolders = ~/.mail/austin-courtyardapp.com
+nametrans = lambda folder: {'drafts':  'Drafts',
+                            'sent':    'Sent Messages',
+                            'trash':   'Deleted Messages',
+                            'archive': 'Archive'
+                            }.get(folder, folder)
+
+[Repository Courtyard-Remote]
+type = IMAP
+remotehost = imap.courtyardapp.com
+remoteuser = austin
+remotepasseval = get_keychain_pass(account="austin@courtyardapp.com", server="imap.courtyardapp.com")
+realdelete = no
+maxconnections = 2
+nametrans = lambda folder: {'Drafts':           'drafts',
+                            'Sent Messages':    'sent',
+                            'Deleted Messages': 'trash',
+                            'Archive':          'archive',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder not in ['Apple Mail To Do', 'Junk', 'Notes']
 
