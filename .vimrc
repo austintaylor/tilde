@@ -68,6 +68,7 @@ set autoread
 set ttimeout
 set ttimeoutlen=100
 set backspace=2
+set laststatus=2 " always show a status line
 
 " No bells
 set visualbell t_vb=
@@ -78,6 +79,7 @@ set expandtab
 set smarttab
 set shiftwidth=2
 set tabstop=2
+set shiftround
 
 " Split behavior
 set splitbelow
@@ -234,6 +236,8 @@ nnoremap zp :put *<cr>`[v`]=
 command! Q :q
 command! W :w
 " command! X :x
+
+inoremap <c-u> <esc>gUiwea
 
 " Dash
 nmap <silent> K <Plug>DashSearch
