@@ -1,0 +1,13 @@
+set from       = "Austin Taylor <austin@courtyardapp.com>"
+set signature  = ~/tilde/mutt/sig/courtyard.sig
+set spoolfile  = +austin-courtyardapp.com/INBOX
+set record     = +austin-courtyardapp.com/sent
+set postponed  = +austin-courtyardapp.com/drafts
+set mbox       = +austin-courtyardapp.com/archive
+set sendmail   = "/usr/local/bin/msmtp -a courtyard"
+color status green black
+ignore *
+unignore from to cc date subject
+unhdr_order *
+hdr_order from to cc date subject
+
