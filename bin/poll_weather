@@ -2,6 +2,12 @@
 # encoding: UTF-8
 require 'open-uri'
 loc = `whereami | tail -4 | head -2 | tr '\n' ' ' | awk '{ print $2","$4 }'`
+i = 0
+while loc.split(',').map(&:to_i) == [0, 0] && i < 3
+  # retry if we don't have a good lat / lon
+  loc = `whereami | tail -4 | head -2 | tr '\n' ' ' | awk '{ print $2","$4 }'`
+  i += 1
+end
 key = 'd281ddbbd3d67ec3cae2e6b4e90a04a7'
 url = "https://api.forecast.io/forecast/#{key}/#{loc}"
 json = open(URI.parse(url)).read
