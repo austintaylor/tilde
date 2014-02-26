@@ -96,7 +96,7 @@ set showmatch
 set hlsearch
 nnoremap / /\V
 vnoremap / /\V
-map <leader><space> :let @/=''<cr>
+nnoremap <silent> <leader><space> :nohlsearch<cr>
 
 " Persistent undo
 if v:version >= 703
@@ -347,4 +347,3 @@ endfunction
 autocmd User Rails Rnavcommand factory        spec/factories            -glob=* -suffix=_factories.rb
 autocmd User Rails Rnavcommand feature        features                  -glob=* -suffix=.feature
 autocmd User Rails Rnavcommand stepdefinition features/step_definitions -glob=* -suffix=_steps.rb
-
