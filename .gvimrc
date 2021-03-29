@@ -11,3 +11,5 @@ set guioptions-=TlRLrb
 
 " Fullscreen should use the whole screen
 set fuoptions=maxvert,maxhorz
+
+set guitablabel=%{TabLabel()}

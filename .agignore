@@ -1,0 +1,6 @@
+log
+app/assets/fonts/*
+app/assets/images/*
+public/*
+app/assets/images/*
+*.eps

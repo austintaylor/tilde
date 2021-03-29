@@ -1,3 +1,3 @@
 Austin Taylor
-Developer
+Lead Developer
 UserVoice.com

@@ -30,7 +30,8 @@ type = Gmail
 remoteuser = austin.taylor@gmail.com
 remotepasseval = get_keychain_pass(account="austin.taylor@gmail.com", server="imap.gmail.com")
 realdelete = no
-cert_fingerprint = 89091347184d41768bfc0da9fad94bfe882dd358
+; http://cascadianhacker.com/blog/2014/05/15_sslcacertfile-fingerprint-on-disk.html
+sslcacertfile = ~/tilde/mutt/ca-bundle.crt
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Sent Mail': 'sent',
                             '[Gmail]/Starred':   'flagged',
@@ -63,7 +64,7 @@ type = Gmail
 remoteuser = austin@uservoice.com
 remotepasseval = get_keychain_pass(account="austin@uservoice.com", server="imap.gmail.com")
 realdelete = no
-cert_fingerprint = 89091347184d41768bfc0da9fad94bfe882dd358
+sslcacertfile = ~/tilde/mutt/ca-bundle.crt
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Sent Mail': 'sent',
                             '[Gmail]/Starred':   'flagged',

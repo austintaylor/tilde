@@ -4,3 +4,9 @@
 vendor/bundle
 vendor/ruby
 tags
+**/#*
+**/.#*
+.projectile
+*~
+.projections.json
+.ignore

@@ -6,40 +6,53 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/opt/fzf
 
-Bundle 'Townk/vim-autoclose'
-Bundle 'austintaylor/vim-commaobject'
-Bundle 'austintaylor/vim-indentobject'
-Bundle 'austintaylor/vim-objectcompletion'
-Bundle 'b4winckler/vim-objc'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'kana/vim-fakeclip'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'msanders/snipmate.vim'
-Bundle 'nacitar/a.vim'
-Bundle 'qqshfox/objc_matchbracket'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'zhaocai/cocoa.vim'
-Bundle 'epeli/slimux'
-Bundle 'oscarh/vimerl'
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'Townk/vim-autoclose'
+Plugin 'austintaylor/vim-commaobject'
+Plugin 'austintaylor/vim-indentobject'
+Plugin 'austintaylor/vim-objectcompletion'
+Plugin 'austintaylor/vim-open'
+Plugin 'kana/vim-fakeclip'
+Plugin 'kien/ctrlp.vim'
+Plugin 'rking/ag.vim'
+Plugin 'msanders/snipmate.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-rhubarb'
+Plugin 'tpope/vim-haystack'
+Plugin 'tpope/vim-projectionist'
+Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'oscarh/vimerl'
+Plugin 'rizzatti/funcoo.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'fatih/vim-go'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'chrisbra/csv.vim'
+Plugin 'posva/vim-vue'
+Plugin 'jremmen/vim-ripgrep'
+
+call vundle#end()
 
 let g:loaded_syntastic_plugin = 1
+let g:tsuquyomi_disable_quickfix = 1
+
+let g:project_dir = "~/dev"
+
+let g:go_fmt_command = "goimports"
 
 filetype plugin indent on
 
@@ -50,9 +63,14 @@ filetype plugin indent on
 let mapleader = ","
 
 syntax on
-colorscheme jellybeans
-hi markdownCode guifg=#a0a9bf
-hi markdownCodeBlock guifg=#a0a9bf
+
+if has("gui_running")
+  colorscheme jellybeans
+  hi markdownCode guifg=#a0a9bf
+  hi markdownCodeBlock guifg=#a0a9bf
+else
+  colorscheme pyte
+endif
 
 set encoding=utf-8
 set nowrap
@@ -69,6 +87,11 @@ set ttimeout
 set ttimeoutlen=100
 set backspace=2
 set laststatus=2 " always show a status line
+
+" Disable hover tooltips
+set noballooneval
+let g:ruby_balloonexpr = 0
+let g:netrw_nobeval = 1
 
 " No bells
 set visualbell t_vb=
@@ -118,6 +141,12 @@ let loaded_matchparen = 1
 let g:ctrlp_cmd = 'CtrlPMRUFiles'
 let g:ctrlp_mruf_relative=1
 
+nnoremap <leader>f :FZF<CR>
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\v(public|bower_components|node_modules|coverage|sso|tmp|\.git|\.vagrant|\.sass-cache)'
+  \ }
+
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_enable_signs=1
 let g:syntastic_mode_map = { 'mode': 'passive',
@@ -144,6 +173,7 @@ augroup vimrc
   au BufRead,BufNewFile *.handlebars set filetype=html
   au BufRead,BufNewFile *.json       set filetype=javascript
   au BufRead,BufNewFile *.js.erb     set filetype=javascript
+  au FileType vue syntax sync fromstart
 
   " Auto-reload
   au BufWritePost .vimrc source %
@@ -180,6 +210,7 @@ vnoremap p "0p
 noremap H ^
 noremap L g_
 nnoremap \ ,
+cnoremap <C-G> <C-C>
 
 " Open my private todo file
 nmap <leader>t :sp .todo<CR>
@@ -189,9 +220,7 @@ nmap <leader><leader>t :sp ~/Dropbox/todos/global.todo<CR>
 nmap <C-h> zH
 nmap <C-l> zL
 
-" Make C-w o (only window) reversible by opening a tab
-nnoremap <C-W>O :tabnew %<CR>
-nnoremap <C-W>o :tabnew %<CR>
+" Make C-w C-o (only window) reversible by opening a tab
 nnoremap <C-W><C-O> :tabnew %<CR>
 
 " Tree commands
@@ -199,9 +228,9 @@ map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 map <leader>R :NERDTreeFind<CR>
 map <leader>e :e =system("pbpaste \| awk -F: '{print $1 \"\|\" $2}'")<CR><CR>
 
-" Ack
-nnoremap <leader>a :Ack<space>
-vnoremap <leader>a "ry:Ack<space>"r"
+" Rg
+nnoremap <leader>a :Rg<space>
+vnoremap <leader>a "ry:Rg<space>"r"
 
 " Reselect pasted text
 nnoremap <leader>p `[v`]
@@ -241,6 +270,18 @@ inoremap <c-u> <esc>gUiwea
 
 " Dash
 nmap <silent> K <Plug>DashSearch
+
+" relative open file
+function! RelativeFile()
+  let file = expand('%')
+  if isdirectory(file)
+    let prefix = file . '/'
+  else
+    let prefix = expand('%:h') . '/'
+  endif
+  return prefix
+endfunction
+nnoremap <leader>e :e <c-r>=RelativeFile()<CR>
 
 " Find & Replace
 nnoremap <leader>r :%s//
@@ -340,10 +381,3 @@ function! TabLabel()
   endif
 endfunction
 
-" ------------------------------------------------------------
-"  Rails Customization
-" ------------------------------------------------------------
-
-autocmd User Rails Rnavcommand factory        spec/factories            -glob=* -suffix=_factories.rb
-autocmd User Rails Rnavcommand feature        features                  -glob=* -suffix=.feature
-autocmd User Rails Rnavcommand stepdefinition features/step_definitions -glob=* -suffix=_steps.rb
